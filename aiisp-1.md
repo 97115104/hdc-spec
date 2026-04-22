@@ -1,4 +1,4 @@
-# HDC-1: The Human Data Collective Inference Transparency Standard
+# AIISP-1: The Artificial Intelligence Inference Standards Protocol
 
 **Status:** Draft (v0.1, April 2026)
 **Author:** Austin Harshberger, Happy Stack Calculus LLC, `x@97115104.com`
@@ -29,9 +29,9 @@ The author intends to submit this document for community review through, in orde
 
 A single LLM inference request today bundles, into a single dollar amount, the cost of electricity, the cost of water for cooling, the embodied carbon of the compute substrate, the amortized cost of training data, and the provider's margin. None of these components is exposed to the requester, the regulator, or the human author whose work trained the model. The result is that none of them can be priced, audited, or compensated.
 
-HDC-1 specifies a way to break that single dollar amount into named, machine-readable line items at the moment the request is served, and to settle those line items against a public ledger. It does not require any change to model architecture, training methodology, or pricing strategy. It requires only that the provider expose what is already happening inside its own billing system, in a standard format, on a standard channel.
+AIISP-1 specifies a way to break that single dollar amount into named, machine-readable line items at the moment the request is served, and to settle those line items against a public ledger. It does not require any change to model architecture, training methodology, or pricing strategy. It requires only that the provider expose what is already happening inside its own billing system, in a standard format, on a standard channel.
 
-The forcing function for adoption is the data, not the regulation. Sustainable access to fresh, attributed, categorized human-generated data is becoming the binding constraint on continued model improvement, and the Collective is the only proposed structure that produces such data at scale while compensating its sources. HDC-1 is the wire format that makes that exchange auditable.
+The forcing function for adoption is the data, not the regulation. Sustainable access to fresh, attributed, categorized human-generated data is becoming the binding constraint on continued model improvement, and the Collective is the only proposed structure that produces such data at scale while compensating its sources. AIISP-1 is the wire format that makes that exchange auditable.
 
 ---
 
@@ -118,7 +118,7 @@ The JSON object encoded in `X-HDC-Cost` MUST conform to the following schema. Al
 
 ```json
 {
-  "version": "hdc-1",
+  "version": "aiisp-1",
   "request_id": "string, opaque, provider-scoped",
   "model": "string, provider-scoped model identifier",
   "tokens": {
@@ -134,7 +134,7 @@ The JSON object encoded in `X-HDC-Cost` MUST conform to the following schema. Al
   "energy": {
     "kwh":         "0.0000045",
     "region":      "us-west-2",
-    "rate_source": "https://hdc.org/registry/energy/us-west-2/2026-04"
+    "rate_source": "https://humandatacollective.org/registry/energy/us-west-2/2026-04"
   },
   "environmental": {
     "carbon_share_usd": "0.000010",
@@ -151,7 +151,7 @@ The JSON object encoded in `X-HDC-Cost` MUST conform to the following schema. Al
 
 Field-by-field requirements:
 
-- `version` MUST be the string `hdc-1` for this specification.
+- `version` MUST be the string `aiisp-1` for this specification.
 - `cost.total_usd` MUST equal the sum of `energy_usd`, `environmental_usd`, and `premium_usd`, computed in fixed-point arithmetic at six decimal places.
 - `hdc.share_usd` MUST be at least one percent of `cost.premium_usd`, rounded up to the nearest 1e-6 USD.
 - `hdc.split.creators + hdc.split.reviewers + hdc.split.operations` MUST equal `1.00` exactly.
@@ -180,7 +180,7 @@ Any deviation from this distribution by a Provider that has emitted `X-HDC-Cost`
 
 ## 7. Backward compatibility
 
-A Provider that does not implement HDC-1 is unaffected; existing clients continue to operate without change. A Client that does not implement HDC-1 is unaffected; the Provider simply does not route the request through the settlement contract. A Client that sends `X-HDC-Token` to a non-implementing Provider receives a normal response and MUST NOT treat the absence of `X-HDC-Cost` as an error, since intermediate proxies, load balancers, and pre-existing API gateways may strip unknown headers.
+A Provider that does not implement AIISP-1 is unaffected; existing clients continue to operate without change. A Client that does not implement AIISP-1 is unaffected; the Provider simply does not route the request through the settlement contract. A Client that sends `X-HDC-Token` to a non-implementing Provider receives a normal response and MUST NOT treat the absence of `X-HDC-Cost` as an error, since intermediate proxies, load balancers, and pre-existing API gateways may strip unknown headers.
 
 The standard adds zero required latency to the inference response path, since cost-record serialization is performed alongside normal billing-record emission and on-chain settlement is performed asynchronously in the deferred case.
 
@@ -210,13 +210,13 @@ The HDC headers carry no Client-identifying information beyond what the Provider
 
 This document defines four new HTTP headers, namely `X-HDC-Token`, `X-HDC-Settlement`, `X-HDC-Attribution`, and `X-HDC-Cost`. On formal acceptance the prefix SHOULD be migrated from `X-HDC-` to `HDC-` per RFC 6648 deprecation guidance.
 
-The HDC registry MUST be a public, append-only, signed registry maintained at a stable URL under `hdc.org` and mirrored on-chain at a contract address published in this document's revision history. The registry maps each Provider to its registered BIT contract address, its energy rate-source endpoint, and its settlement-batch resolution endpoint.
+The HDC registry MUST be a public, append-only, signed registry maintained at a stable URL under `humandatacollective.org` and mirrored on-chain at a contract address published in this document's revision history. The registry maps each Provider to its registered BIT contract address, its energy rate-source endpoint, and its settlement-batch resolution endpoint.
 
 ---
 
 ## 10. Reference implementation
 
-A reference implementation of the cost-record emitter, the on-chain settlement contract, and a conformance test suite is being prepared and will be published in this repository (`https://github.com/97115104/hdc-spec`) under a `reference/` subdirectory, MIT-licensed. The conformance suite issues a structured set of test requests against any HTTP inference endpoint, parses the returned `X-HDC-Cost` records, and verifies arithmetic, schema, and on-chain settlement correctness.
+A reference implementation of the cost-record emitter, the on-chain settlement contract, and a conformance test suite is being prepared and will be published in this repository (`https://github.com/97115104/aiisp-spec`) under a `reference/` subdirectory, MIT-licensed. The conformance suite issues a structured set of test requests against any HTTP inference endpoint, parses the returned `X-HDC-Cost` records, and verifies arithmetic, schema, and on-chain settlement correctness.
 
 ---
 
@@ -249,7 +249,7 @@ Decoded `X-HDC-Cost`:
 
 ```json
 {
-  "version": "hdc-1",
+  "version": "aiisp-1",
   "request_id": "req_abc123",
   "model": "example-llm-large",
   "tokens": {"input": 700, "output": 300},
@@ -298,7 +298,7 @@ GET https://example-provider.com/hdc/batches/2026-04-22T18:00Z-batch-7741
 >
 > | Field | Value |
 > | --- | --- |
-> | **Content** | HDC-1: The Human Data Collective Inference Transparency Standard |
+> | **Content** | AIISP-1: The Artificial Intelligence Inference Standards Protocol |
 > | **Author** | A. Harshberger |
 > | **AI collaborators** | Claude Opus 4.7 |
 > | **Role** | collaborated (multi-prompt iterative authoring; human directed structure, argument, and final wording; AI assisted with drafting and formatting under human review) |
@@ -317,13 +317,13 @@ GET https://example-provider.com/hdc/batches/2026-04-22T18:00Z-batch-7741
 >
 > | Field | Value |
 > | --- | --- |
-> | **Content** | hdc-spec: GitHub Pages deployment and workflow setup |
+> | **Content** | aiisp-spec: GitHub Pages deployment and workflow setup |
 > | **Author** | A. Harshberger |
 > | **AI collaborators** | Claude Sonnet 4.6, Claude Opus 4.7 |
 > | **Role** | collaborated (multi-prompt session; agent audited repo, diagnosed Pages 404, fixed Node.js 24 deprecation in workflow, verified issue templates and spec markdown) |
 > | **Authorship** | collab |
 > | **Prompt type** | multi-prompt |
-> | **Prompt summary** | *Review hdc-spec GitHub repo; diagnose and fix Actions Pages workflow; audit issue templates, markdown spec, and docs/index.html* |
+> | **Prompt summary** | *Review aiisp-spec GitHub repo; diagnose and fix Actions Pages workflow; audit issue templates, markdown spec, and docs/index.html* |
 > | **Platform** | GitHub Copilot in VS Code |
 > | **Timestamp** | 2026-04-22T09:02:46Z |
 > | **Verify** | <https://attest.97115104.com/s/ngi7tmcp> |
