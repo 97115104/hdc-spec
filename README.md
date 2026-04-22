@@ -1,4 +1,4 @@
-# HDC-1: The Human Data Collective Inference Transparency Standard
+# AIISP-1: The Artificial Intelligence Inference Standards Protocol
 
 [![Status: Draft](https://img.shields.io/badge/status-draft%20v0.1-orange)](./hdc-1.md)
 [![Spec License: CC BY 4.0](https://img.shields.io/badge/spec%20license-CC%20BY%204.0-blue)](./LICENSE-SPEC)
