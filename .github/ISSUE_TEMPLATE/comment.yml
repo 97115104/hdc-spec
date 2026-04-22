@@ -1,0 +1,33 @@
+name: Comment on the spec
+description: A specific objection, question, or suggestion against a numbered section of HDC-1.
+title: "[comment] "
+labels: ["comment", "hdc-1"]
+body:
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: Which numbered section of the spec does this comment apply to? (e.g. "3.1", "Appendix A")
+      placeholder: "5.0"
+    validations:
+      required: true
+  - type: textarea
+    id: comment
+    attributes:
+      label: Your comment
+      description: Describe the issue, question, or suggestion. Quote the relevant text where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change (optional)
+      description: If you have a specific textual change to suggest, paste it here. PRs are welcome too.
+  - type: input
+    id: affiliation
+    attributes:
+      label: Disclosure of affiliation
+      description: Per CONTRIBUTING.md, please disclose any affiliation with parties that would be affected by this standard.
+      placeholder: "None / Independent researcher / Employee of [org]"
+    validations:
+      required: true

@@ -1,0 +1,32 @@
+name: Errata
+description: Report a typo, broken link, arithmetic error, or factual mistake in a published draft.
+title: "[errata] "
+labels: ["errata"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Spec version
+      placeholder: "v0.1"
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Section number, line number, or quoted phrase.
+      placeholder: "Section 5, field hdc.share_usd"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What is wrong
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested correction
+    validations:
+      required: true

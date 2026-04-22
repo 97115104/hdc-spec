@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HDC-1: The Human Data Collective Inference Transparency Standard</title>
+<meta name="description" content="A minimal, opt-in HTTP standard for declaring and settling the energy, environmental, and human-attribution components of LLM inference requests.">
+<link rel="canonical" href="https://97115104.github.io/hdc-spec/">
+<style>
+  :root {
+    --fg: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #fdfdfa;
+    --accent: #b04a2e;
+    --code-bg: #f3f1ec;
+    --border: #d8d3c4;
+    --link: #2d5a8a;
+    --max-width: 760px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg: #e8e6e0;
+      --muted: #9a978e;
+      --bg: #1a1814;
+      --accent: #d97a5c;
+      --code-bg: #25221c;
+      --border: #3a362c;
+      --link: #7aa3d4;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: 'Charter', 'Iowan Old Style', 'Palatino', Georgia, serif;
+    color: var(--fg);
+    background: var(--bg);
+    margin: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
+  header.banner {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  header.banner .label {
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  header.banner h1 {
+    font-size: 1.8rem;
+    line-height: 1.25;
+    margin: 0.4rem 0 0.5rem;
+  }
+  header.banner .meta {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  nav.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  nav.toolbar a {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--fg);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    background: var(--code-bg);
+  }
+  nav.toolbar a:hover { border-color: var(--accent); color: var(--accent); }
+  nav.toolbar a.primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  nav.toolbar a.primary:hover { opacity: 0.9; color: white; }
+  article { font-size: 1.05rem; }
+  article h1 { font-size: 1.7rem; margin-top: 2.5rem; line-height: 1.25; }
+  article h2 { font-size: 1.35rem; margin-top: 2rem; line-height: 1.3; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  article h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+  article h4 { font-size: 1rem; margin-top: 1.2rem; }
+  article a { color: var(--link); }
+  article code {
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+  article pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  article pre code { background: none; padding: 0; font-size: inherit; }
+  article blockquote {
+    border-left: 3px solid var(--border);
+    margin: 1.2rem 0;
+    padding: 0.3rem 1rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  article table { border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; width: 100%; }
+  article th, article td { border: 1px solid var(--border); padding: 0.4rem 0.7rem; text-align: left; }
+  article th { background: var(--code-bg); }
+  article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .comment-cta {
+    margin: 3rem 0 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--code-bg);
+  }
+  .comment-cta h3 { margin-top: 0; }
+  .comment-cta p { margin-bottom: 0.8rem; }
+  .comment-cta a.button {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+  }
+  footer.site {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .loading { color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="banner">
+    <div class="label">Open standard · Draft for public comment</div>
+    <h1>HDC-1: The Human Data Collective Inference Transparency Standard</h1>
+    <div class="meta">Editor: Austin Harshberger · v0.1 · April 2026 · CC BY 4.0</div>
+    <nav class="toolbar">
+      <a class="primary" href="https://github.com/97115104/hdc-spec/issues/1">Comment on this draft →</a>
+      <a href="https://github.com/97115104/hdc-spec">Repository</a>
+      <a href="https://github.com/97115104/hdc-spec/blob/main/hdc-1.md">Source (Markdown)</a>
+      <a href="https://github.com/97115104/hdc-spec/issues/new/choose">File an issue</a>
+      <a href="https://github.com/97115104/hdc-spec/blob/main/CONTRIBUTING.md">How to contribute</a>
+      <a href="https://github.com/97115104/hdc-spec/blob/main/GOVERNANCE.md">Governance</a>
+    </nav>
+  </header>
+
+  <article id="spec">
+    <p class="loading">Loading specification…</p>
+  </article>
+
+  <section class="comment-cta">
+    <h3>Have a comment, objection, or proposed amendment?</h3>
+    <p>Public discussion of HDC-1 v0.1 is hosted on GitHub. Reply on the main thread for general comments, or open a structured issue to file a specific objection, propose an amendment, or report errata.</p>
+    <p>
+      <a class="button" href="https://github.com/97115104/hdc-spec/issues/1">Open the discussion thread →</a>
+    </p>
+  </section>
+
+  <footer class="site">
+    <p>
+      Specification text licensed
+      <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+      Reference implementation (when published) MIT.
+      Source on <a href="https://github.com/97115104/hdc-spec">GitHub</a>.
+      Companion paper: <a href="https://github.com/97115104/human-data-network">human-data-network</a>.
+    </p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+  (function () {
+    const target = document.getElementById('spec');
+    fetch('./hdc-1.md', { cache: 'no-cache' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Failed to load spec: HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (md) {
+        marked.setOptions({ gfm: true, breaks: false, headerIds: true, mangle: false });
+        target.innerHTML = marked.parse(md);
+      })
+      .catch(function (err) {
+        target.innerHTML =
+          '<p style="color:#b04a2e">Could not load the spec inline. ' +
+          'Read it directly on <a href="https://github.com/97115104/hdc-spec/blob/main/hdc-1.md">GitHub</a>.</p>';
+        console.error(err);
+      });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+name: Propose an amendment
+description: Propose a substantive new feature, header, or behaviour for HDC-1 (or a new HDC-N spec).
+title: "[amendment] "
+labels: ["amendment", "hdc-1"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Target spec
+      description: Which spec is this amendment for? (HDC-1, or proposing HDC-2 / HDC-3 / etc.)
+      placeholder: "HDC-1"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is the underlying problem that motivates this amendment?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the proposed amendment in detail. Include wire-format changes, new headers, or behavioural changes as appropriate.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Backward compatibility
+      description: How does this affect implementations of the current spec?
+    validations:
+      required: true
+  - type: input
+    id: affiliation
+    attributes:
+      label: Disclosure of affiliation
+      placeholder: "None / Independent researcher / Employee of [org]"
+    validations:
+      required: true
