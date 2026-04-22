@@ -3,209 +3,404 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HDC-1: The Human Data Collective Inference Transparency Standard</title>
-<meta name="description" content="A minimal, opt-in HTTP standard for declaring and settling the energy, environmental, and human-attribution components of LLM inference requests.">
+<title>HDC-1 — Human Data Collective Inference Transparency Standard</title>
+<meta name="description" content="A minimal, opt-in HTTP standard for declaring and settling the energy, environmental, and human-attribution components of a single LLM inference request.">
 <link rel="canonical" href="https://97115104.github.io/hdc-spec/">
 <style>
+  /* Deliberately spare. RFC / 80s protocol-document aesthetic.
+     Monospace body, narrow column, no images, ASCII diagram. */
   :root {
     --fg: #1a1a1a;
-    --muted: #5a5a5a;
-    --bg: #fdfdfa;
-    --accent: #b04a2e;
-    --code-bg: #f3f1ec;
-    --border: #d8d3c4;
-    --link: #2d5a8a;
-    --max-width: 760px;
+    --muted: #666;
+    --bg: #fbfaf6;
+    --rule: #c9c4b3;
+    --link: #1f4f8a;
+    --accent: #a23a1f;
+    --hi: #fff7d6;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --fg: #e8e6e0;
-      --muted: #9a978e;
-      --bg: #1a1814;
+      --fg: #e6e3d8;
+      --muted: #908c80;
+      --bg: #14130f;
+      --rule: #3a3730;
+      --link: #82a8d8;
       --accent: #d97a5c;
-      --code-bg: #25221c;
-      --border: #3a362c;
-      --link: #7aa3d4;
+      --hi: #2a2410;
     }
   }
-  * { box-sizing: border-box; }
-  html { font-size: 16px; }
+  html { font-size: 15px; }
   body {
-    font-family: 'Charter', 'Iowan Old Style', 'Palatino', Georgia, serif;
+    font-family: 'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
     color: var(--fg);
     background: var(--bg);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
-  header.banner {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
+  main {
+    max-width: 78ch;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
   }
-  header.banner .label {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.8rem;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  header.banner h1 {
-    font-size: 1.8rem;
-    line-height: 1.25;
-    margin: 0.4rem 0 0.5rem;
-  }
-  header.banner .meta {
-    font-size: 0.85rem;
+  pre.banner {
+    margin: 0 0 1.5rem;
+    font-size: 0.78rem;
+    line-height: 1.2;
     color: var(--muted);
+    white-space: pre;
+    overflow-x: auto;
   }
-  nav.toolbar {
+  .meta {
+    border: 1px solid var(--rule);
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+  }
+  .meta div { display: flex; gap: 0.5rem; }
+  .meta .k { color: var(--muted); width: 14ch; flex-shrink: 0; }
+  h1, h2 {
+    font-family: inherit;
+    font-weight: 700;
+    margin-top: 2.4rem;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.3rem;
+  }
+  h1 { margin-top: 0; }
+  p { margin: 0.7rem 0; }
+  a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--accent); }
+  .hi { background: var(--hi); padding: 0 0.2em; }
+  pre.diagram {
+    font-size: 0.78rem;
+    line-height: 1.25;
+    background: transparent;
+    border: 1px solid var(--rule);
+    padding: 1rem;
+    margin: 1.2rem 0;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--fg);
+  }
+  pre.example {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    background: transparent;
+    border-left: 3px solid var(--rule);
+    padding: 0.4rem 0 0.4rem 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  ul.plain {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0;
+  }
+  ul.plain li {
+    padding-left: 2ch;
+    text-indent: -2ch;
+    margin: 0.25rem 0;
+  }
+  ul.plain li::before { content: "*  "; color: var(--muted); }
+  table.toc {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 0.6rem 0 1rem;
+  }
+  table.toc td {
+    padding: 0.2rem 0.5rem;
+    vertical-align: top;
+    border: none;
+  }
+  table.toc td.n { color: var(--muted); width: 4ch; text-align: right; }
+  .actions {
+    margin: 2rem 0 1rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 1rem;
+    gap: 0.5rem;
   }
-  nav.toolbar a {
+  .actions a {
     display: inline-block;
-    padding: 0.35rem 0.7rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.8rem;
+    font-size: 0.82rem;
     text-decoration: none;
     color: var(--fg);
-    font-size: 0.8rem;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    background: var(--code-bg);
+    background: var(--bg);
   }
-  nav.toolbar a:hover { border-color: var(--accent); color: var(--accent); }
-  nav.toolbar a.primary {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
+  .actions a:hover { border-color: var(--accent); color: var(--accent); }
+  .actions a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .actions a.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.5rem 0;
   }
-  nav.toolbar a.primary:hover { opacity: 0.9; color: white; }
-  article { font-size: 1.05rem; }
-  article h1 { font-size: 1.7rem; margin-top: 2.5rem; line-height: 1.25; }
-  article h2 { font-size: 1.35rem; margin-top: 2rem; line-height: 1.3; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
-  article h3 { font-size: 1.1rem; margin-top: 1.5rem; }
-  article h4 { font-size: 1rem; margin-top: 1.2rem; }
-  article a { color: var(--link); }
-  article code {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.88em;
-    background: var(--code-bg);
-    padding: 0.1em 0.35em;
-    border-radius: 3px;
-  }
-  article pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1rem;
-    overflow-x: auto;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-  article pre code { background: none; padding: 0; font-size: inherit; }
-  article blockquote {
-    border-left: 3px solid var(--border);
-    margin: 1.2rem 0;
-    padding: 0.3rem 1rem;
+  footer {
     color: var(--muted);
-    font-style: italic;
+    font-size: 0.78rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
   }
-  article table { border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; width: 100%; }
-  article th, article td { border: 1px solid var(--border); padding: 0.4rem 0.7rem; text-align: left; }
-  article th { background: var(--code-bg); }
-  article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
-  .comment-cta {
-    margin: 3rem 0 0;
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--code-bg);
+  footer a { color: var(--muted); }
+  @media (max-width: 600px) {
+    pre.banner, pre.diagram { font-size: 0.66rem; }
+    .meta .k { width: 12ch; }
   }
-  .comment-cta h3 { margin-top: 0; }
-  .comment-cta p { margin-bottom: 0.8rem; }
-  .comment-cta a.button {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    background: var(--accent);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.9rem;
-  }
-  footer.site {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-  .loading { color: var(--muted); font-style: italic; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="banner">
-    <div class="label">Open standard · Draft for public comment</div>
-    <h1>HDC-1: The Human Data Collective Inference Transparency Standard</h1>
-    <div class="meta">Editor: Austin Harshberger · v0.1 · April 2026 · CC BY 4.0</div>
-    <nav class="toolbar">
-      <a class="primary" href="https://github.com/97115104/hdc-spec/issues/1">Comment on this draft →</a>
-      <a href="https://github.com/97115104/hdc-spec">Repository</a>
-      <a href="https://github.com/97115104/hdc-spec/blob/main/hdc-1.md">Source (Markdown)</a>
-      <a href="https://github.com/97115104/hdc-spec/issues/new/choose">File an issue</a>
-      <a href="https://github.com/97115104/hdc-spec/blob/main/CONTRIBUTING.md">How to contribute</a>
-      <a href="https://github.com/97115104/hdc-spec/blob/main/GOVERNANCE.md">Governance</a>
-    </nav>
-  </header>
+<main>
 
-  <article id="spec">
-    <p class="loading">Loading specification…</p>
-  </article>
+<pre class="banner">
++============================================================================+
+|                                                                            |
+|   H D C - 1                                                                |
+|   Human Data Collective Inference Transparency Standard                    |
+|                                                                            |
++============================================================================+
+</pre>
 
-  <section class="comment-cta">
-    <h3>Have a comment, objection, or proposed amendment?</h3>
-    <p>Public discussion of HDC-1 v0.1 is hosted on GitHub. Reply on the main thread for general comments, or open a structured issue to file a specific objection, propose an amendment, or report errata.</p>
-    <p>
-      <a class="button" href="https://github.com/97115104/hdc-spec/issues/1">Open the discussion thread →</a>
-    </p>
-  </section>
-
-  <footer class="site">
-    <p>
-      Specification text licensed
-      <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
-      Reference implementation (when published) MIT.
-      Source on <a href="https://github.com/97115104/hdc-spec">GitHub</a>.
-      Companion paper: <a href="https://github.com/97115104/human-data-network">human-data-network</a>.
-    </p>
-  </footer>
+<div class="meta">
+  <div><span class="k">Document:</span><span>HDC-1</span></div>
+  <div><span class="k">Status:</span><span>Draft for public comment</span></div>
+  <div><span class="k">Version:</span><span>0.1 &nbsp;&middot;&nbsp; April 2026</span></div>
+  <div><span class="k">Editor:</span><span>Austin Harshberger &lt;x@97115104.com&gt;</span></div>
+  <div><span class="k">Repository:</span><span><a href="https://github.com/97115104/hdc-spec">github.com/97115104/hdc-spec</a></span></div>
+  <div><span class="k">Discussion:</span><span><a href="https://github.com/97115104/hdc-spec/issues/1">issue #1 &mdash; public review thread</a></span></div>
+  <div><span class="k">License:</span><span>CC&nbsp;BY&nbsp;4.0 (text) &nbsp;&middot;&nbsp; MIT (code)</span></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<script>
-  (function () {
-    const target = document.getElementById('spec');
-    fetch('./hdc-1.md', { cache: 'no-cache' })
-      .then(function (r) {
-        if (!r.ok) throw new Error('Failed to load spec: HTTP ' + r.status);
-        return r.text();
-      })
-      .then(function (md) {
-        marked.setOptions({ gfm: true, breaks: false, headerIds: true, mangle: false });
-        target.innerHTML = marked.parse(md);
-      })
-      .catch(function (err) {
-        target.innerHTML =
-          '<p style="color:#b04a2e">Could not load the spec inline. ' +
-          'Read it directly on <a href="https://github.com/97115104/hdc-spec/blob/main/hdc-1.md">GitHub</a>.</p>';
-        console.error(err);
-      });
-  })();
-</script>
+<h1>1. What this is</h1>
+
+<p>HDC-1 is an open standard for breaking the dollar amount you pay
+for a single Large Language Model (LLM) inference request into
+<span class="hi">named, machine-readable parts</span>: how much was
+electricity, how much was water and carbon, how much was the
+provider's premium, and how much is owed to the people whose
+work made the model possible.</p>
+
+<p>It is a small specification &mdash; two optional request headers,
+two response headers, one JSON record, one settlement contract.
+It is opt-in, transport-agnostic, and designed to be added to any
+existing HTTP-based inference API in an afternoon.</p>
+
+<p>It is published in the spirit of the early internet RFCs:
+short, composable, opt-in, and owned by no single party.</p>
+
+<h1>2. Why it is useful</h1>
+
+<p>Today, when a model answers a question, exactly one number is
+exposed to the requester: the price. That number bundles together
+electricity, cooling water, embodied carbon of the chips,
+amortized cost of the training data, and the provider's margin.
+Because the components are bundled, none of them can be priced,
+audited, or compensated separately.</p>
+
+<p>HDC-1 unbundles them on the wire, in a format any auditor,
+regulator, or downstream pipeline can read, and settles the
+unbundled amounts on a public ledger so the receiving parties
+&mdash; environmental funds, contributor pools, peer reviewers
+&mdash; actually get paid in the same transaction that bills the
+client.</p>
+
+<h1>3. The picture</h1>
+
+<pre class="diagram">
+                            +--------------------+
+   Client (any app) ------&gt; |  Inference         |  &lt;-- normal HTTP today
+   sends one extra header   |  Provider          |
+   X-HDC-Token: 0x...       |  (Anthropic,       |
+                            |   OpenAI, you,     |
+   gets back one extra      |   anyone)          |
+   header in response       |                    |
+   X-HDC-Cost: {...}  &lt;---- |                    |
+                            +---------+----------+
+                                      |
+                                      | one settlement transaction,
+                                      | batched on a published cadence
+                                      v
+                            +--------------------+
+                            |  HDC Settlement    |
+                            |  Contract (Base)   |
+                            +---------+----------+
+                                      |
+        +-----------+-----------+-----+-----+-----------+
+        |           |           |           |           |
+        v           v           v           v           v
+   +---------+ +---------+ +---------+ +---------+ +---------+
+   | Energy  | | Carbon  | | Water   | | Provider| |  HDC    |
+   | (back   | |  Fund   | |  Fund   | | premium | |  share  |
+   | to      | |         | |         | | (minus  | |  (>= 1% |
+   | provider| |         | |         | | HDC cut)| | of      |
+   | as cost | |         | |         | |         | | premium)|
+   | recoup) | |         | |         | |         | |         |
+   +---------+ +---------+ +---------+ +---------+ +----+----+
+                                                        |
+                                          80% / 5% / 15% split
+                                                        |
+                                  +---------------------+---------------------+
+                                  |                     |                     |
+                                  v                     v                     v
+                            +-----------+         +-----------+         +-----------+
+                            | Creators  |         |  Peer     |         |Operations |
+                            | (attested |         | reviewers |         |  multisig |
+                            | authors)  |         |           |         |           |
+                            +-----------+         +-----------+         +-----------+
+</pre>
+
+<p class="muted" style="font-size: 0.82rem; color: var(--muted);">
+Figure 1. The wire path of a single HDC-1 inference request.
+Two extra HTTP headers in, one extra header out, one on-chain
+settlement transaction. Everything else is unchanged.
+</p>
+
+<h1>4. The whole protocol on one screen</h1>
+
+<pre class="example">
+REQUEST  --------------------------------------------------------
+  POST /v1/messages HTTP/1.1
+  Host: api.example-provider.com
+  Content-Type: application/json
+  X-HDC-Token: 0xA1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4
+  X-HDC-Settlement: deferred
+  ...
+
+RESPONSE -------------------------------------------------------
+  HTTP/1.1 200 OK
+  X-HDC-Cost: &lt;base64url JSON record, see below&gt;
+  X-HDC-Settlement-Batch: 2026-04-22T18:00Z-batch-7741
+  ...
+
+DECODED COST RECORD (X-HDC-Cost) -------------------------------
+  {
+    "version": "hdc-1",
+    "cost": {
+      "energy_usd":        "0.000010",
+      "environmental_usd": "0.000020",
+      "premium_usd":       "0.001000",
+      "total_usd":         "0.001030"
+    },
+    "hdc": {
+      "share_usd": "0.000010",
+      "split":     {"creators": "0.80",
+                    "reviewers": "0.05",
+                    "operations": "0.15"},
+      "token":     "0xA1B2...",
+      "settlement":"deferred"
+    }
+  }
+</pre>
+
+<p>That is the entire wire format. The full specification, the
+JSON schema, the settlement-contract behaviour, security
+considerations, and a worked end-to-end example are in the
+specification document.</p>
+
+<div class="actions">
+  <a class="primary" href="./spec.html">Read the full specification &rarr;</a>
+  <a href="https://github.com/97115104/hdc-spec/blob/main/hdc-1.md">View source (Markdown)</a>
+  <a href="https://github.com/97115104/hdc-spec">Repository</a>
+</div>
+
+<h1>5. Who this is for</h1>
+
+<ul class="plain">
+  <li><strong>Inference providers</strong> &mdash; you can implement
+      HDC-1 in an afternoon and gain a public, auditable record
+      of where each dollar of compute revenue goes.</li>
+  <li><strong>Regulators</strong> &mdash; HDC-1 produces the
+      machine-readable per-request disclosure that recent state
+      and federal AI legislation is moving toward, without
+      requiring a new agency or a compute threshold.</li>
+  <li><strong>Contributors and creators</strong> &mdash; the
+      attested-author pool is the channel by which the people
+      whose work trained these models can actually be paid, on
+      the same transaction that bills the user of the model.</li>
+  <li><strong>Communities bearing environmental cost</strong>
+      &mdash; the carbon and water shares are routed to dedicated
+      funds, with the explicit goal of moving from
+      restoration-certificate proxies to direct grants in the
+      affected watershed as fast as the on-chain primitives
+      allow.</li>
+  <li><strong>Auditors and academic researchers</strong> &mdash;
+      every settled request is a public on-chain record. Sample,
+      recompute against the published energy rate, compare. The
+      arithmetic is small, the data is open.</li>
+</ul>
+
+<h1>6. How to comment</h1>
+
+<p>This draft is open for public review. Comments shape v0.2.</p>
+
+<table class="toc">
+  <tr><td class="n">&rarr;</td><td>General comment or question
+    &nbsp;&mdash;&nbsp;
+    <a href="https://github.com/97115104/hdc-spec/issues/1">reply on issue #1</a></td></tr>
+  <tr><td class="n">&rarr;</td><td>Structured objection against a section
+    &nbsp;&mdash;&nbsp;
+    <a href="https://github.com/97115104/hdc-spec/issues/new?template=comment.yml">new Comment issue</a></td></tr>
+  <tr><td class="n">&rarr;</td><td>Propose an amendment or new behaviour
+    &nbsp;&mdash;&nbsp;
+    <a href="https://github.com/97115104/hdc-spec/issues/new?template=amendment.yml">new Amendment issue</a></td></tr>
+  <tr><td class="n">&rarr;</td><td>Typo, broken link, arithmetic error
+    &nbsp;&mdash;&nbsp;
+    <a href="https://github.com/97115104/hdc-spec/issues/new?template=errata.yml">new Errata issue</a></td></tr>
+  <tr><td class="n">&rarr;</td><td>Suggest specific text
+    &nbsp;&mdash;&nbsp;
+    <a href="https://github.com/97115104/hdc-spec/pulls">open a Pull Request</a></td></tr>
+  <tr><td class="n">&rarr;</td><td>Private comment (COI, security)
+    &nbsp;&mdash;&nbsp;
+    email <a href="mailto:x@97115104.com">x@97115104.com</a></td></tr>
+</table>
+
+<p>If you are commenting on behalf of an organization that this
+standard would affect &mdash; a frontier provider, a regulator, a
+worker organization, an environmental group &mdash; please
+disclose that affiliation in your comment. See
+<a href="https://github.com/97115104/hdc-spec/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+and
+<a href="https://github.com/97115104/hdc-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>
+for the full process.</p>
+
+<h1>7. Status and disclosure</h1>
+
+<p>HDC-1 v0.1 is a draft. It is not a ratified standard of any
+standards-development organization. The editor intends to
+submit it for community review through the IETF ART area, the
+Decentralized Identity Foundation, and the W3C AI Provenance
+community group.</p>
+
+<p>The editor (Austin Harshberger) is the principal of Happy Stack
+Calculus LLC, which intends to operate the reference
+implementation of HDC-1. This is a present and ongoing conflict
+of interest. The plan, documented in
+<a href="https://github.com/97115104/hdc-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>,
+is to migrate ratification authority for v1.0 to a
+multi-stakeholder body before HDC-1 is declared stable. The
+editor's compensation, once any settlement flows exist, will be
+published on the same on-chain ledger as contributor
+compensation.</p>
+
+<footer>
+  <p>HDC-1 specification text licensed
+    <a href="https://creativecommons.org/licenses/by/4.0/">CC&nbsp;BY&nbsp;4.0</a>.
+    Reference implementation MIT.
+    Source on
+    <a href="https://github.com/97115104/hdc-spec">GitHub</a>.
+    Companion paper: <em>What if AI served everyone as a public good
+    and got better in the process?</em> by A. Harshberger, April 2026.</p>
+  <p>This page is intentionally plain. No tracking, no analytics,
+    no JavaScript on the homepage. View source.</p>
+</footer>
+
+</main>
 </body>
 </html>
