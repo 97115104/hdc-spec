@@ -309,4 +309,23 @@ GET https://example-provider.com/hdc/batches/2026-04-22T18:00Z-batch-7741
 > | **Timestamp** | 2026-04-22T05:10:00Z |
 > | **Verify** | <https://attest.97115104.com/s/r11xzkrm> |
 
+---
+
+> **attest v3.0** &nbsp;·&nbsp; `2026-04-22-9b85b1`
+>
+> *Human–AI collaboration.*
+>
+> | Field | Value |
+> | --- | --- |
+> | **Content** | hdc-spec: GitHub Pages deployment and workflow setup |
+> | **Author** | A. Harshberger |
+> | **AI collaborators** | Claude Sonnet 4.6, Claude Opus 4.7 |
+> | **Role** | collaborated (multi-prompt session; agent audited repo, diagnosed Pages 404, fixed Node.js 24 deprecation in workflow, verified issue templates and spec markdown) |
+> | **Authorship** | collab |
+> | **Prompt type** | multi-prompt |
+> | **Prompt summary** | *Review hdc-spec GitHub repo; diagnose and fix Actions Pages workflow; audit issue templates, markdown spec, and docs/index.html* |
+> | **Platform** | GitHub Copilot in VS Code |
+> | **Timestamp** | 2026-04-22T09:02:46Z |
+> | **Verify** | <https://attest.97115104.com/s/ngi7tmcp> |
+
 © 2026 Happy Stack Calculus LLC. Specification text licensed CC BY 4.0; reference implementation MIT.
