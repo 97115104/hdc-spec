@@ -51,7 +51,7 @@ This is a **Draft (v0.1, April 2026)** circulated for public comment. It is not,
 ```bibtex
 @misc{hdc1_2026,
   author       = {Harshberger, Austin},
-  title        = {{HDC-1}: The {Human Data Collective} Inference Transparency Standard},
+  title        = {HDC-1: The Human Data Collective Inference Transparency Standard},
   year         = {2026},
   month        = apr,
   version      = {Draft v0.1},

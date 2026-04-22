@@ -85,7 +85,7 @@ The editor (Austin Harshberger) is the principal of Happy Stack Calculus LLC, wh
 ```bibtex
 @misc{hdc1spec2026,
   author       = {Harshberger, Austin},
-  title        = {{HDC-1}: The {Human Data Collective} Inference Transparency Standard},
+  title        = {HDC-1: The Human Data Collective Inference Transparency Standard},
   year         = {2026},
   month        = apr,
   howpublished = {\url{https://github.com/97115104/hdc-spec}},
