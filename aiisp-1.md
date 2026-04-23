@@ -328,4 +328,21 @@ GET https://example-provider.com/aiisp/batches/2026-04-22T18:00Z-batch-7741
 > | **Timestamp** | 2026-04-22T09:02:46Z |
 > | **Verify** | <https://attest.97115104.com/s/ngi7tmcp> |
 
+> **attest v3.0** &nbsp;·&nbsp; `2026-04-23-ef113e`
+>
+> *Human–AI collaboration.*
+>
+> | Field | Value |
+> | --- | --- |
+> | **Content** | AIISP-1: The Artificial Intelligence Inference Standards Protocol |
+> | **Author** | A. Harshberger |
+> | **AI collaborators** | Claude Sonnet 4.6 |
+> | **Role** | collaborated (multi-prompt session; renamed all HDC references to AIISP throughout spec and all supporting files; updated collective website to humandatacollective.org) |
+> | **Authorship** | collab |
+> | **Prompt type** | multi-prompt |
+> | **Prompt summary** | *Rename all HDC references to AIISP throughout spec and supporting files; update collective website to humandatacollective.org* |
+> | **Platform** | GitHub Copilot in VS Code |
+> | **Timestamp** | 2026-04-23T00:30:52Z |
+> | **Verify** | <https://attest.97115104.com/s/2eu7qy3r> |
+
 © 2026 Happy Stack Calculus LLC. Specification text licensed CC BY 4.0; reference implementation MIT.
