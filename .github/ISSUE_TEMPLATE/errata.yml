@@ -15,7 +15,7 @@ body:
     attributes:
       label: Location
       description: Section number, line number, or quoted phrase.
-      placeholder: "Section 5, field hdc.share_usd"
+      placeholder: "Section 5, field aiisp.share_usd"
     validations:
       required: true
   - type: textarea

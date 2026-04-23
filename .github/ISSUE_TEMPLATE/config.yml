@@ -1,7 +1,7 @@
 blank_issues_enabled: true
 contact_links:
-  - name: General discussion (HDC-1 v0.1)
-    url: https://github.com/97115104/hdc-spec/issues/1
+  - name: General discussion (AIISP-1 v0.1)
+    url: https://github.com/97115104/aiisp-spec/issues/1
     about: The primary public review thread. Reply here for general comments.
   - name: Email the editor
     url: mailto:x@97115104.com

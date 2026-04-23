@@ -3,8 +3,8 @@
 **Status:** Draft (v0.1, April 2026)
 **Author:** Austin Harshberger, Happy Stack Calculus LLC, `x@97115104.com`
 **Category:** Standards Track
-**Repository:** <https://github.com/97115104/hdc-spec>
-**Discussion:** <https://github.com/97115104/hdc-spec/issues/1>
+**Repository:** <https://github.com/97115104/aiisp-spec>
+**Discussion:** <https://github.com/97115104/aiisp-spec/issues/1>
 **License:** CC BY 4.0 (specification text); reference implementation MIT.
 
 ---
@@ -19,7 +19,7 @@ The standard is published in the spirit of the early internet RFCs, namely small
 
 ## Status of this memo
 
-This memo specifies a proposed standard for the inference transparency layer of the Human Data Collective (HDC). It is published for comment and is not, at the date of writing, a ratified standard of any standards-development organization. Distribution is unlimited.
+This memo specifies a proposed standard for the inference transparency layer of the Human Data Collective. It is published for comment and is not, at the date of writing, a ratified standard of any standards-development organization. Distribution is unlimited.
 
 The author intends to submit this document for community review through, in order, the Internet Engineering Task Force (IETF) ART area, the Decentralized Identity Foundation (DIF), and the World Wide Web Consortium (W3C) AI Provenance community group, and will track substantive comments in the public revision history of this document.
 
@@ -41,8 +41,8 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 - **Provider.** An entity that serves LLM inference requests over HTTP, including but not limited to Anthropic, OpenAI, Google, Microsoft, Meta, xAI, Cohere, Mistral, and any operator of a self-hosted open-source model exposed over a network.
 - **Client.** Any process that issues an HTTP inference request to a Provider.
-- **Branded Inference Token (BIT).** An ERC-20 token minted on Base by a Provider, identifying that Provider's participation in the HDC settlement contract.
-- **Settlement Contract.** The on-chain HDC distribution contract, deployed at an address published in the HDC registry, that splits incoming settlement transactions into the energy, environmental, and creator-compensation pools.
+- **Branded Inference Token (BIT).** An ERC-20 token minted on Base by a Provider, identifying that Provider's participation in the AIISP settlement contract.
+- **Settlement Contract.** The on-chain AIISP distribution contract, deployed at an address published in the AIISP registry, that splits incoming settlement transactions into the energy, environmental, and creator-compensation pools.
 - **Attestation.** A signed record produced under the `attest` v3 specification, binding an identifier to authored content; used here to resolve the creator-compensation share to specific contributors.
 - **Settlement cadence.** The interval at which a Provider batches inference requests into a single on-chain settlement transaction. RECOMMENDED to be no longer than 24 hours.
 
@@ -50,32 +50,32 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ## 3. Request headers
 
-### 3.1 `X-HDC-Token`
+### 3.1 `X-AIISP-Token`
 
-A Client MAY include this header on any inference request to opt the request into HDC settlement.
+A Client MAY include this header on any inference request to opt the request into AIISP settlement.
 
 ```
-X-HDC-Token: <0x-prefixed 20-byte hex address of the Provider's BIT>
+X-AIISP-Token: <0x-prefixed 20-byte hex address of the Provider's BIT>
 ```
 
-If the header is absent, the request MUST be processed and billed exactly as it is today, with no HDC settlement performed and no HDC response headers emitted. If the header is present and the supplied token address is not registered in the HDC registry for the receiving Provider, the Provider MUST respond with HTTP 400 and a JSON error body of the form `{"error": "hdc_token_unknown", "token": "0x..."}`.
+If the header is absent, the request MUST be processed and billed exactly as it is today, with no AIISP settlement performed and no AIISP response headers emitted. If the header is present and the supplied token address is not registered in the AIISP registry for the receiving Provider, the Provider MUST respond with HTTP 400 and a JSON error body of the form `{"error": "aiisp_token_unknown", "token": "0x..."}`.
 
-### 3.2 `X-HDC-Settlement`
+### 3.2 `X-AIISP-Settlement`
 
 A Client MAY include this header to control settlement timing.
 
 ```
-X-HDC-Settlement: deferred | realtime
+X-AIISP-Settlement: deferred | realtime
 ```
 
-`deferred` (the default if `X-HDC-Token` is present and `X-HDC-Settlement` is absent) batches the request into the Provider's next settlement cadence. `realtime` requests immediate per-request settlement, which is intended primarily for audit and conformance testing. Providers MAY refuse `realtime` for cost reasons by returning HTTP 503 and a JSON body `{"error": "realtime_unavailable"}`.
+`deferred` (the default if `X-AIISP-Token` is present and `X-AIISP-Settlement` is absent) batches the request into the Provider's next settlement cadence. `realtime` requests immediate per-request settlement, which is intended primarily for audit and conformance testing. Providers MAY refuse `realtime` for cost reasons by returning HTTP 503 and a JSON body `{"error": "realtime_unavailable"}`.
 
-### 3.3 `X-HDC-Attribution`
+### 3.3 `X-AIISP-Attribution`
 
 A Client MAY include this header to declare that the request is intended to produce content that will itself be attested under the `attest` v3 specification, in which case the Provider's response cost record SHOULD additionally include an attribution-eligible flag for downstream pipelines.
 
 ```
-X-HDC-Attribution: attested
+X-AIISP-Attribution: attested
 ```
 
 Absence of this header MUST NOT change settlement behaviour and is purely an informational hint.
@@ -84,37 +84,37 @@ Absence of this header MUST NOT change settlement behaviour and is purely an inf
 
 ## 4. Response headers
 
-### 4.1 `X-HDC-Cost`
+### 4.1 `X-AIISP-Cost`
 
-A Provider that processes a request bearing `X-HDC-Token` MUST return this header on the corresponding response. The value is a single base64url-encoded JSON object conforming to the schema defined in Section 5.
+A Provider that processes a request bearing `X-AIISP-Token` MUST return this header on the corresponding response. The value is a single base64url-encoded JSON object conforming to the schema defined in Section 5.
 
 ```
-X-HDC-Cost: <base64url(JSON cost record)>
+X-AIISP-Cost: <base64url(JSON cost record)>
 ```
 
-If the request did not carry `X-HDC-Token`, the Provider MUST NOT emit `X-HDC-Cost`.
+If the request did not carry `X-AIISP-Token`, the Provider MUST NOT emit `X-AIISP-Cost`.
 
-### 4.2 `X-HDC-Settlement-Tx`
+### 4.2 `X-AIISP-Settlement-Tx`
 
 For requests settled in `realtime` mode, the Provider MUST return the on-chain transaction hash of the settlement.
 
 ```
-X-HDC-Settlement-Tx: 0x<32-byte hex>
+X-AIISP-Settlement-Tx: 0x<32-byte hex>
 ```
 
 For `deferred` mode, the Provider MUST instead return a settlement-batch identifier that will appear in a subsequent on-chain batch.
 
 ```
-X-HDC-Settlement-Batch: <opaque string, max 64 chars>
+X-AIISP-Settlement-Batch: <opaque string, max 64 chars>
 ```
 
-A Provider MUST publish, at a stable URL discoverable from the HDC registry, a JSON endpoint mapping each `X-HDC-Settlement-Batch` value to the on-chain transaction hash that ultimately settled it. The mapping MUST become available no later than 24 hours after the settlement cadence closes.
+A Provider MUST publish, at a stable URL discoverable from the AIISP registry, a JSON endpoint mapping each `X-AIISP-Settlement-Batch` value to the on-chain transaction hash that ultimately settled it. The mapping MUST become available no later than 24 hours after the settlement cadence closes.
 
 ---
 
 ## 5. Cost record schema
 
-The JSON object encoded in `X-HDC-Cost` MUST conform to the following schema. All monetary values are denominated in United States dollars and serialized as decimal strings to avoid floating-point ambiguity.
+The JSON object encoded in `X-AIISP-Cost` MUST conform to the following schema. All monetary values are denominated in United States dollars and serialized as decimal strings to avoid floating-point ambiguity.
 
 ```json
 {
@@ -140,7 +140,7 @@ The JSON object encoded in `X-HDC-Cost` MUST conform to the following schema. Al
     "carbon_share_usd": "0.000010",
     "water_share_usd":  "0.000010"
   },
-  "hdc": {
+  "aiisp": {
     "share_usd":    "0.000010",
     "split":        {"creators": "0.80", "reviewers": "0.05", "operations": "0.15"},
     "token":        "0xA1B2...",
@@ -153,8 +153,8 @@ Field-by-field requirements:
 
 - `version` MUST be the string `aiisp-1` for this specification.
 - `cost.total_usd` MUST equal the sum of `energy_usd`, `environmental_usd`, and `premium_usd`, computed in fixed-point arithmetic at six decimal places.
-- `hdc.share_usd` MUST be at least one percent of `cost.premium_usd`, rounded up to the nearest 1e-6 USD.
-- `hdc.split.creators + hdc.split.reviewers + hdc.split.operations` MUST equal `1.00` exactly.
+- `aiisp.share_usd` MUST be at least one percent of `cost.premium_usd`, rounded up to the nearest 1e-6 USD.
+- `aiisp.split.creators + aiisp.split.reviewers + aiisp.split.operations` MUST equal `1.00` exactly.
 - `energy.rate_source` MUST be a URL serving the per-region per-month kWh rate used by the Provider, in machine-readable form, retained for at least 24 months.
 - All other fields are REQUIRED unless explicitly marked optional in a future revision.
 
@@ -164,23 +164,23 @@ A worked example for a 1,000-token blended request appears in Appendix A.
 
 ## 6. Settlement contract
 
-A Provider that returns `X-HDC-Cost` MUST settle the corresponding amounts on-chain through the HDC Settlement Contract on Base, at the address published in the HDC registry. A single settlement transaction MAY aggregate any number of requests within one settlement cadence.
+A Provider that returns `X-AIISP-Cost` MUST settle the corresponding amounts on-chain through the AIISP Settlement Contract on Base, at the address published in the AIISP registry. A single settlement transaction MAY aggregate any number of requests within one settlement cadence.
 
 The contract atomically distributes the incoming amount as follows:
 
 - `energy_usd` is retained by the Provider's own treasury address.
-- `environmental.carbon_share_usd` is forwarded to the HDC Carbon Credit Fund contract.
-- `environmental.water_share_usd` is forwarded to the HDC Water Credit Fund contract.
-- `premium_usd minus hdc.share_usd` is forwarded to the Provider's treasury address.
-- `hdc.share_usd` is forwarded to the HDC Distribution Contract, which further splits it 80/5/15 between the creator-attestation pool, the peer-reviewer pool, and the HDC operations multisig.
+- `environmental.carbon_share_usd` is forwarded to the AIISP Carbon Credit Fund contract.
+- `environmental.water_share_usd` is forwarded to the AIISP Water Credit Fund contract.
+- `premium_usd minus aiisp.share_usd` is forwarded to the Provider's treasury address.
+- `aiisp.share_usd` is forwarded to the AIISP Distribution Contract, which further splits it 80/5/15 between the creator-attestation pool, the peer-reviewer pool, and the AIISP operations multisig.
 
-Any deviation from this distribution by a Provider that has emitted `X-HDC-Cost` constitutes a violation of the standard and is grounds for revocation of the Provider's BIT registration.
+Any deviation from this distribution by a Provider that has emitted `X-AIISP-Cost` constitutes a violation of the standard and is grounds for revocation of the Provider's BIT registration.
 
 ---
 
 ## 7. Backward compatibility
 
-A Provider that does not implement AIISP-1 is unaffected; existing clients continue to operate without change. A Client that does not implement AIISP-1 is unaffected; the Provider simply does not route the request through the settlement contract. A Client that sends `X-HDC-Token` to a non-implementing Provider receives a normal response and MUST NOT treat the absence of `X-HDC-Cost` as an error, since intermediate proxies, load balancers, and pre-existing API gateways may strip unknown headers.
+A Provider that does not implement AIISP-1 is unaffected; existing clients continue to operate without change. A Client that does not implement AIISP-1 is unaffected; the Provider simply does not route the request through the settlement contract. A Client that sends `X-AIISP-Token` to a non-implementing Provider receives a normal response and MUST NOT treat the absence of `X-AIISP-Cost` as an error, since intermediate proxies, load balancers, and pre-existing API gateways may strip unknown headers.
 
 The standard adds zero required latency to the inference response path, since cost-record serialization is performed alongside normal billing-record emission and on-chain settlement is performed asynchronously in the deferred case.
 
@@ -190,7 +190,7 @@ The standard adds zero required latency to the inference response path, since co
 
 ### 8.1 Spoofed cost records
 
-A malicious Provider could emit an `X-HDC-Cost` record that under-reports the true energy or environmental cost of the request. The standard mitigates this by requiring `energy.rate_source` to point at a publicly retained machine-readable rate document and by requiring on-chain settlement, which makes systematic under-reporting visible in the cumulative on-chain balance of the Provider's BIT. Auditors MAY sample requests, recompute the expected energy and environmental lines from the published rate, and compare against the on-chain settlement record.
+A malicious Provider could emit an `X-AIISP-Cost` record that under-reports the true energy or environmental cost of the request. The standard mitigates this by requiring `energy.rate_source` to point at a publicly retained machine-readable rate document and by requiring on-chain settlement, which makes systematic under-reporting visible in the cumulative on-chain balance of the Provider's BIT. Auditors MAY sample requests, recompute the expected energy and environmental lines from the published rate, and compare against the on-chain settlement record.
 
 ### 8.2 Replay and double-billing
 
@@ -198,25 +198,25 @@ The `request_id` field is Provider-scoped and MAY be opaque, so the standard doe
 
 ### 8.3 Attribution fraud
 
-The creator-attestation pool is resolved against `attest` v3 records, which carry their own signature, timestamp, and registry-anchoring requirements. Identity fraud and prompt-laundering attacks against the attestation primitive are out of scope for this document and addressed in HDC-2 (forthcoming).
+The creator-attestation pool is resolved against `attest` v3 records, which carry their own signature, timestamp, and registry-anchoring requirements. Identity fraud and prompt-laundering attacks against the attestation primitive are out of scope for this document and addressed in AIISP-2 (forthcoming).
 
 ### 8.4 Privacy of the Client
 
-The HDC headers carry no Client-identifying information beyond what the Provider already collects to bill the Client. Implementations MUST NOT log the request payload or model output to the public ledger; only the structured cost record described in Section 5 is settled on-chain, and that record contains no Client identity, no prompt content, and no model output.
+The AIISP headers carry no Client-identifying information beyond what the Provider already collects to bill the Client. Implementations MUST NOT log the request payload or model output to the public ledger; only the structured cost record described in Section 5 is settled on-chain, and that record contains no Client identity, no prompt content, and no model output.
 
 ---
 
 ## 9. IANA and registry considerations
 
-This document defines four new HTTP headers, namely `X-HDC-Token`, `X-HDC-Settlement`, `X-HDC-Attribution`, and `X-HDC-Cost`. On formal acceptance the prefix SHOULD be migrated from `X-HDC-` to `HDC-` per RFC 6648 deprecation guidance.
+This document defines four new HTTP headers, namely `X-AIISP-Token`, `X-AIISP-Settlement`, `X-AIISP-Attribution`, and `X-AIISP-Cost`. On formal acceptance the prefix SHOULD be migrated from `X-AIISP-` to `AIISP-` per RFC 6648 deprecation guidance.
 
-The HDC registry MUST be a public, append-only, signed registry maintained at a stable URL under `humandatacollective.org` and mirrored on-chain at a contract address published in this document's revision history. The registry maps each Provider to its registered BIT contract address, its energy rate-source endpoint, and its settlement-batch resolution endpoint.
+The AIISP registry MUST be a public, append-only, signed registry maintained at a stable URL under `humandatacollective.org` and mirrored on-chain at a contract address published in this document's revision history. The registry maps each Provider to its registered BIT contract address, its energy rate-source endpoint, and its settlement-batch resolution endpoint.
 
 ---
 
 ## 10. Reference implementation
 
-A reference implementation of the cost-record emitter, the on-chain settlement contract, and a conformance test suite is being prepared and will be published in this repository (`https://github.com/97115104/aiisp-spec`) under a `reference/` subdirectory, MIT-licensed. The conformance suite issues a structured set of test requests against any HTTP inference endpoint, parses the returned `X-HDC-Cost` records, and verifies arithmetic, schema, and on-chain settlement correctness.
+A reference implementation of the cost-record emitter, the on-chain settlement contract, and a conformance test suite is being prepared and will be published in this repository (`https://github.com/97115104/aiisp-spec`) under a `reference/` subdirectory, MIT-licensed. The conformance suite issues a structured set of test requests against any HTTP inference endpoint, parses the returned `X-AIISP-Cost` records, and verifies arithmetic, schema, and on-chain settlement correctness.
 
 ---
 
@@ -234,18 +234,18 @@ A 1,000-token blended request (700 input + 300 output) against a Provider with a
 POST /v1/messages HTTP/1.1
 Host: api.example-provider.com
 Content-Type: application/json
-X-HDC-Token: 0xA1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4
-X-HDC-Settlement: deferred
+X-AIISP-Token: 0xA1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4
+X-AIISP-Settlement: deferred
 ```
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-X-HDC-Cost: eyJ2ZXJzaW9uIjoiaGRjLTEiLCJyZXF1ZXN0X2lkIjoicmVxX2FiYzEyMyIs...
-X-HDC-Settlement-Batch: 2026-04-22T18:00Z-batch-7741
+X-AIISP-Cost: eyJ2ZXJzaW9uIjoiaGRjLTEiLCJyZXF1ZXN0X2lkIjoicmVxX2FiYzEyMyIs...
+X-AIISP-Settlement-Batch: 2026-04-22T18:00Z-batch-7741
 ```
 
-Decoded `X-HDC-Cost`:
+Decoded `X-AIISP-Cost`:
 
 ```json
 {
@@ -262,13 +262,13 @@ Decoded `X-HDC-Cost`:
   "energy": {
     "kwh":         "0.0000045",
     "region":      "us-west-2",
-    "rate_source": "https://example-provider.com/hdc/energy/us-west-2/2026-04"
+    "rate_source": "https://example-provider.com/aiisp/energy/us-west-2/2026-04"
   },
   "environmental": {
     "carbon_share_usd": "0.000010",
     "water_share_usd":  "0.000010"
   },
-  "hdc": {
+  "aiisp": {
     "share_usd":  "0.000010",
     "split":      {"creators": "0.80", "reviewers": "0.05", "operations": "0.15"},
     "token":      "0xA1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4",
@@ -280,7 +280,7 @@ Decoded `X-HDC-Cost`:
 At settlement cadence, the Provider submits a single transaction settling this and all other requests in batch `2026-04-22T18:00Z-batch-7741`. After confirmation, the Provider publishes:
 
 ```
-GET https://example-provider.com/hdc/batches/2026-04-22T18:00Z-batch-7741
+GET https://example-provider.com/aiisp/batches/2026-04-22T18:00Z-batch-7741
 {"tx": "0x9f8e...e221", "block": 19234567, "settled_at": "2026-04-22T18:00:14Z"}
 ```
 
@@ -292,7 +292,7 @@ GET https://example-provider.com/hdc/batches/2026-04-22T18:00Z-batch-7741
 
 ---
 
-> **attest v3.0** &nbsp;·&nbsp; `2026-04-22-hdc1-77bcdb`
+> **attest v3.0** &nbsp;·&nbsp; `2026-04-22-aiisp1-77bcdb`
 >
 > *Human–AI collaboration.*
 >
@@ -304,7 +304,7 @@ GET https://example-provider.com/hdc/batches/2026-04-22T18:00Z-batch-7741
 > | **Role** | collaborated (multi-prompt iterative authoring; human directed structure, argument, and final wording; AI assisted with drafting and formatting under human review) |
 > | **Authorship** | collab |
 > | **Prompt type** | multi-prompt |
-> | **Prompt summary** | *RFC-style standards-track specification for HDC inference transparency headers* |
+> | **Prompt summary** | *RFC-style standards-track specification for AIISP inference transparency headers* |
 > | **Platform** | GitHub Copilot in VS Code |
 > | **Timestamp** | 2026-04-22T05:10:00Z |
 > | **Verify** | <https://attest.97115104.com/s/r11xzkrm> |

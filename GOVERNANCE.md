@@ -1,12 +1,12 @@
-# Governance of the HDC Standards Family
+# Governance of the AIISP Standards Family
 
-This document describes how decisions are made about the HDC family of specifications, including HDC-1 and any future HDC-N drafts published in this repository.
+This document describes how decisions are made about the AIISP family of specifications, including AIISP-1 and any future AIISP-N drafts published in this repository.
 
 ## Status
 
-HDC is, at the time of writing, an **editor-driven** standards effort. The editor (Austin Harshberger, `x@97115104.com`) is the sole decision-maker of last resort for HDC-1 v0.1. This is the same model under which the early IETF RFCs were edited (Jon Postel for RFC 791 and many of the foundational documents) and is appropriate for the pre-ratification stage of any new standard.
+AIISP is, at the time of writing, an **editor-driven** standards effort. The editor (Austin Harshberger, `x@97115104.com`) is the sole decision-maker of last resort for AIISP-1 v0.1. This is the same model under which the early IETF RFCs were edited (Jon Postel for RFC 791 and many of the foundational documents) and is appropriate for the pre-ratification stage of any new standard.
 
-The editor commits to migrating governance to a multi-stakeholder body before HDC-1 is ratified to v1.0, with seats reserved for at least the following constituencies:
+The editor commits to migrating governance to a multi-stakeholder body before AIISP-1 is ratified to v1.0, with seats reserved for at least the following constituencies:
 
 - A worker organization or labour-research institution representing data contributors.
 - An environmental organization representing communities affected by data-center water and energy use.
@@ -15,9 +15,9 @@ The editor commits to migrating governance to a multi-stakeholder body before HD
 - An academic representative from the AI policy or computational linguistics research community.
 - The editor.
 
-The composition of the multi-stakeholder body and the procedure by which seats are filled will be specified in **HDC-3: Governance**, currently a stub.
+The composition of the multi-stakeholder body and the procedure by which seats are filled will be specified in **AIISP-3: Governance**, currently a stub.
 
-## Decision-making for HDC-1 v0.x drafts
+## Decision-making for AIISP-1 v0.x drafts
 
 While the standard is in `v0.x` draft status, the editor has final authority over text changes. The editor commits to:
 
@@ -44,11 +44,11 @@ The specification text is licensed under [CC BY 4.0](./LICENSE-SPEC), which mean
 
 ## Conflicts of interest
 
-The editor is the founder of Happy Stack Calculus LLC, which intends to operate the reference implementation of the HDC settlement contract on Base as a public-benefit company. This is a direct material interest in the standard's adoption. The editor commits to:
+The editor is the founder of Happy Stack Calculus LLC, which intends to operate the reference implementation of the AIISP settlement contract on Base as a public-benefit company. This is a direct material interest in the standard's adoption. The editor commits to:
 
 - Disclosing the conflict on every public communication about the standard.
 - Recusing from any decision in which the operator's commercial interests diverge from the contributors' interests, to be adjudicated by the multi-stakeholder body once seated.
-- Publishing the operating company's compensation alongside contributor compensation on the same on-chain ledger described in HDC-1 Section 6.
+- Publishing the operating company's compensation alongside contributor compensation on the same on-chain ledger described in AIISP-1 Section 6.
 
 ## Amendment procedure
 
@@ -62,4 +62,4 @@ Substantive amendments to a published version proceed as follows:
 
 ## Forking the family namespace
 
-HDC-N numbers (HDC-1, HDC-2, HDC-3, …) are assigned by the editor on a first-come basis through an Amendment-template issue. The editor will not assign a number to a specification that materially conflicts with a currently published HDC-N spec without first deprecating the conflicting spec through the standard amendment procedure.
+AIISP-N numbers (AIISP-1, AIISP-2, AIISP-3, …) are assigned by the editor on a first-come basis through an Amendment-template issue. The editor will not assign a number to a specification that materially conflicts with a currently published AIISP-N spec without first deprecating the conflicting spec through the standard amendment procedure.

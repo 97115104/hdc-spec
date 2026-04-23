@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "If you cite or implement HDC-1, please reference this draft."
-title: "HDC-1: The Human Data Collective Inference Transparency Standard"
+message: "If you cite or implement AIISP-1, please reference this draft."
+title: "AIISP-1: The Artificial Intelligence Inference Standards Protocol"
 abstract: >
-  HDC-1 specifies a minimal, transport-agnostic, opt-in HTTP standard for
+  AIISP-1 specifies a minimal, transport-agnostic, opt-in HTTP standard for
   declaring and settling the energy, environmental, and human-attribution
   components of a single Large Language Model inference request.
 authors:
@@ -13,8 +13,8 @@ authors:
 version: "0.1"
 date-released: "2026-04-22"
 license: CC-BY-4.0
-repository-code: "https://github.com/97115104/hdc-spec"
-url: "https://github.com/97115104/hdc-spec"
+repository-code: "https://github.com/97115104/aiisp-spec"
+url: "https://github.com/97115104/aiisp-spec"
 keywords:
   - llm
   - inference

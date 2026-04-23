@@ -13,7 +13,7 @@ Closes #
 - [ ] Editorial (typo, formatting, broken link)
 - [ ] Substantive (alters conformant implementation behaviour)
 - [ ] Errata (correction to a published version)
-- [ ] New spec proposal (adds an HDC-N file)
+- [ ] New spec proposal (adds an AIISP-N file)
 
 ## Substantive-change checklist
 

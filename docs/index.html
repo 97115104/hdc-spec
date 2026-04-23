@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HDC-1 — Human Data Collective Inference Transparency Standard</title>
+<title>AIISP-1 — Artificial Intelligence Inference Standards Protocol</title>
 <meta name="description" content="A minimal, opt-in HTTP standard for declaring and settling the energy, environmental, and human-attribution components of a single LLM inference request.">
-<link rel="canonical" href="https://97115104.github.io/hdc-spec/">
+<link rel="canonical" href="https://97115104.github.io/aiisp-spec/">
 <style>
   /* Deliberately spare. RFC / 80s protocol-document aesthetic.
      Monospace body, narrow column, no images, ASCII diagram. */
@@ -162,25 +162,25 @@
 <pre class="banner">
 +============================================================================+
 |                                                                            |
-|   H D C - 1                                                                |
-|   Human Data Collective Inference Transparency Standard                    |
+|   A I I S P - 1                                                                |
+|   Artificial Intelligence Inference Standards Protocol                    |
 |                                                                            |
 +============================================================================+
 </pre>
 
 <div class="meta">
-  <div><span class="k">Document:</span><span>HDC-1</span></div>
+  <div><span class="k">Document:</span><span>AIISP-1</span></div>
   <div><span class="k">Status:</span><span>Draft for public comment</span></div>
   <div><span class="k">Version:</span><span>0.1 &nbsp;&middot;&nbsp; April 2026</span></div>
   <div><span class="k">Editor:</span><span>Austin Harshberger &lt;x@97115104.com&gt;</span></div>
-  <div><span class="k">Repository:</span><span><a href="https://github.com/97115104/hdc-spec">github.com/97115104/hdc-spec</a></span></div>
-  <div><span class="k">Discussion:</span><span><a href="https://github.com/97115104/hdc-spec/issues/1">issue #1 &mdash; public review thread</a></span></div>
+  <div><span class="k">Repository:</span><span><a href="https://github.com/97115104/aiisp-spec">github.com/97115104/aiisp-spec</a></span></div>
+  <div><span class="k">Discussion:</span><span><a href="https://github.com/97115104/aiisp-spec/issues/1">issue #1 &mdash; public review thread</a></span></div>
   <div><span class="k">License:</span><span>CC&nbsp;BY&nbsp;4.0 (text) &nbsp;&middot;&nbsp; MIT (code)</span></div>
 </div>
 
 <h1>1. What this is</h1>
 
-<p>HDC-1 is an open standard for breaking the dollar amount you pay
+<p>AIISP-1 is an open standard for breaking the dollar amount you pay
 for a single Large Language Model (LLM) inference request into
 <span class="hi">named, machine-readable parts</span>: how much was
 electricity, how much was water and carbon, how much was the
@@ -204,7 +204,7 @@ amortized cost of the training data, and the provider's margin.
 Because the components are bundled, none of them can be priced,
 audited, or compensated separately.</p>
 
-<p>HDC-1 unbundles them on the wire, in a format any auditor,
+<p>AIISP-1 unbundles them on the wire, in a format any auditor,
 regulator, or downstream pipeline can read, and settles the
 unbundled amounts on a public ledger so the receiving parties
 &mdash; environmental funds, contributor pools, peer reviewers
@@ -217,18 +217,18 @@ client.</p>
                             +--------------------+
    Client (any app) ------&gt; |  Inference         |  &lt;-- normal HTTP today
    sends one extra header   |  Provider          |
-   X-HDC-Token: 0x...       |  (Anthropic,       |
+   X-AIISP-Token: 0x...       |  (Anthropic,       |
                             |   OpenAI, you,     |
    gets back one extra      |   anyone)          |
    header in response       |                    |
-   X-HDC-Cost: {...}  &lt;---- |                    |
+   X-AIISP-Cost: {...}  &lt;---- |                    |
                             +---------+----------+
                                       |
                                       | one settlement transaction,
                                       | batched on a published cadence
                                       v
                             +--------------------+
-                            |  HDC Settlement    |
+                            |  AIISP Settlement    |
                             |  Contract (Base)   |
                             +---------+----------+
                                       |
@@ -236,10 +236,10 @@ client.</p>
         |           |           |           |           |
         v           v           v           v           v
    +---------+ +---------+ +---------+ +---------+ +---------+
-   | Energy  | | Carbon  | | Water   | | Provider| |  HDC    |
+   | Energy  | | Carbon  | | Water   | | Provider| |  AIISP    |
    | (back   | |  Fund   | |  Fund   | | premium | |  share  |
    | to      | |         | |         | | (minus  | |  (>= 1% |
-   | provider| |         | |         | | HDC cut)| | of      |
+   | provider| |         | |         | | AIISP cut)| | of      |
    | as cost | |         | |         | |         | | premium)|
    | recoup) | |         | |         | |         | |         |
    +---------+ +---------+ +---------+ +---------+ +----+----+
@@ -257,7 +257,7 @@ client.</p>
 </pre>
 
 <p class="muted" style="font-size: 0.82rem; color: var(--muted);">
-Figure 1. The wire path of a single HDC-1 inference request.
+Figure 1. The wire path of a single AIISP-1 inference request.
 Two extra HTTP headers in, one extra header out, one on-chain
 settlement transaction. Everything else is unchanged.
 </p>
@@ -269,26 +269,26 @@ REQUEST  --------------------------------------------------------
   POST /v1/messages HTTP/1.1
   Host: api.example-provider.com
   Content-Type: application/json
-  X-HDC-Token: 0xA1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4
-  X-HDC-Settlement: deferred
+  X-AIISP-Token: 0xA1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4
+  X-AIISP-Settlement: deferred
   ...
 
 RESPONSE -------------------------------------------------------
   HTTP/1.1 200 OK
-  X-HDC-Cost: &lt;base64url JSON record, see below&gt;
-  X-HDC-Settlement-Batch: 2026-04-22T18:00Z-batch-7741
+  X-AIISP-Cost: &lt;base64url JSON record, see below&gt;
+  X-AIISP-Settlement-Batch: 2026-04-22T18:00Z-batch-7741
   ...
 
-DECODED COST RECORD (X-HDC-Cost) -------------------------------
+DECODED COST RECORD (X-AIISP-Cost) -------------------------------
   {
-    "version": "hdc-1",
+    "version": "aiisp-1",
     "cost": {
       "energy_usd":        "0.000010",
       "environmental_usd": "0.000020",
       "premium_usd":       "0.001000",
       "total_usd":         "0.001030"
     },
-    "hdc": {
+    "aiisp": {
       "share_usd": "0.000010",
       "split":     {"creators": "0.80",
                     "reviewers": "0.05",
@@ -306,17 +306,17 @@ specification document.</p>
 
 <div class="actions">
   <a class="primary" href="./spec.html">Read the full specification &rarr;</a>
-  <a href="https://github.com/97115104/hdc-spec/blob/main/hdc-1.md">View source (Markdown)</a>
-  <a href="https://github.com/97115104/hdc-spec">Repository</a>
+  <a href="https://github.com/97115104/aiisp-spec/blob/main/aiisp-1.md">View source (Markdown)</a>
+  <a href="https://github.com/97115104/aiisp-spec">Repository</a>
 </div>
 
 <h1>5. Who this is for</h1>
 
 <ul class="plain">
   <li><strong>Inference providers</strong> &mdash; you can implement
-      HDC-1 in an afternoon and gain a public, auditable record
+      AIISP-1 in an afternoon and gain a public, auditable record
       of where each dollar of compute revenue goes.</li>
-  <li><strong>Regulators</strong> &mdash; HDC-1 produces the
+  <li><strong>Regulators</strong> &mdash; AIISP-1 produces the
       machine-readable per-request disclosure that recent state
       and federal AI legislation is moving toward, without
       requiring a new agency or a compute threshold.</li>
@@ -343,19 +343,19 @@ specification document.</p>
 <table class="toc">
   <tr><td class="n">&rarr;</td><td>General comment or question
     &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/hdc-spec/issues/1">reply on issue #1</a></td></tr>
+    <a href="https://github.com/97115104/aiisp-spec/issues/1">reply on issue #1</a></td></tr>
   <tr><td class="n">&rarr;</td><td>Structured objection against a section
     &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/hdc-spec/issues/new?template=comment.yml">new Comment issue</a></td></tr>
+    <a href="https://github.com/97115104/aiisp-spec/issues/new?template=comment.yml">new Comment issue</a></td></tr>
   <tr><td class="n">&rarr;</td><td>Propose an amendment or new behaviour
     &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/hdc-spec/issues/new?template=amendment.yml">new Amendment issue</a></td></tr>
+    <a href="https://github.com/97115104/aiisp-spec/issues/new?template=amendment.yml">new Amendment issue</a></td></tr>
   <tr><td class="n">&rarr;</td><td>Typo, broken link, arithmetic error
     &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/hdc-spec/issues/new?template=errata.yml">new Errata issue</a></td></tr>
+    <a href="https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml">new Errata issue</a></td></tr>
   <tr><td class="n">&rarr;</td><td>Suggest specific text
     &nbsp;&mdash;&nbsp;
-    <a href="https://github.com/97115104/hdc-spec/pulls">open a Pull Request</a></td></tr>
+    <a href="https://github.com/97115104/aiisp-spec/pulls">open a Pull Request</a></td></tr>
   <tr><td class="n">&rarr;</td><td>Private comment (COI, security)
     &nbsp;&mdash;&nbsp;
     email <a href="mailto:x@97115104.com">x@97115104.com</a></td></tr>
@@ -365,14 +365,14 @@ specification document.</p>
 standard would affect &mdash; a frontier provider, a regulator, a
 worker organization, an environmental group &mdash; please
 disclose that affiliation in your comment. See
-<a href="https://github.com/97115104/hdc-spec/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+<a href="https://github.com/97115104/aiisp-spec/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
 and
-<a href="https://github.com/97115104/hdc-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>
+<a href="https://github.com/97115104/aiisp-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>
 for the full process.</p>
 
 <h1>7. Status and disclosure</h1>
 
-<p>HDC-1 v0.1 is a draft. It is not a ratified standard of any
+<p>AIISP-1 v0.1 is a draft. It is not a ratified standard of any
 standards-development organization. The editor intends to
 submit it for community review through the IETF ART area, the
 Decentralized Identity Foundation, and the W3C AI Provenance
@@ -380,21 +380,21 @@ community group.</p>
 
 <p>The editor (Austin Harshberger) is the principal of Happy Stack
 Calculus LLC, which intends to operate the reference
-implementation of HDC-1. This is a present and ongoing conflict
+implementation of AIISP-1. This is a present and ongoing conflict
 of interest. The plan, documented in
-<a href="https://github.com/97115104/hdc-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>,
+<a href="https://github.com/97115104/aiisp-spec/blob/main/GOVERNANCE.md">GOVERNANCE.md</a>,
 is to migrate ratification authority for v1.0 to a
-multi-stakeholder body before HDC-1 is declared stable. The
+multi-stakeholder body before AIISP-1 is declared stable. The
 editor's compensation, once any settlement flows exist, will be
 published on the same on-chain ledger as contributor
 compensation.</p>
 
 <footer>
-  <p>HDC-1 specification text licensed
+  <p>AIISP-1 specification text licensed
     <a href="https://creativecommons.org/licenses/by/4.0/">CC&nbsp;BY&nbsp;4.0</a>.
     Reference implementation MIT.
     Source on
-    <a href="https://github.com/97115104/hdc-spec">GitHub</a>.
+    <a href="https://github.com/97115104/aiisp-spec">GitHub</a>.
     Companion paper: <em>What if AI served everyone as a public good
     and got better in the process?</em> by A. Harshberger, April 2026.</p>
   <p>This page is intentionally plain. No tracking, no analytics,

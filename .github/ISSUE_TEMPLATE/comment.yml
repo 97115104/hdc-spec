@@ -1,7 +1,7 @@
 name: Comment on the spec
-description: A specific objection, question, or suggestion against a numbered section of HDC-1.
+description: A specific objection, question, or suggestion against a numbered section of AIISP-1.
 title: "[comment] "
-labels: ["comment", "hdc-1"]
+labels: ["comment", "aiisp-1"]
 body:
   - type: input
     id: section

@@ -1,10 +1,10 @@
-title: HDC-1
+title: AIISP-1
 description: >-
-  The Human Data Collective Inference Transparency Standard.
+  The Artificial Intelligence Inference Standards Protocol.
   A minimal, opt-in HTTP standard for declaring and settling the energy,
   environmental, and human-attribution components of LLM inference requests.
 url: "https://97115104.github.io"
-baseurl: "/hdc-spec"
+baseurl: "/aiisp-spec"
 
 exclude:
   - ISSUE-1-BODY.md

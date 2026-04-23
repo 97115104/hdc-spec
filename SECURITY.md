@@ -1,6 +1,6 @@
-# Reporting security issues in HDC-1
+# Reporting security issues in AIISP-1
 
-If you believe you have found a security issue in the HDC-1 specification, the reference implementation, or the on-chain settlement contract once published, please report it privately to the editor at `x@97115104.com` rather than filing a public issue.
+If you believe you have found a security issue in the AIISP-1 specification, the reference implementation, or the on-chain settlement contract once published, please report it privately to the editor at `x@97115104.com` rather than filing a public issue.
 
 Please include:
 

@@ -1,14 +1,14 @@
 name: Propose an amendment
-description: Propose a substantive new feature, header, or behaviour for HDC-1 (or a new HDC-N spec).
+description: Propose a substantive new feature, header, or behaviour for AIISP-1 (or a new AIISP-N spec).
 title: "[amendment] "
-labels: ["amendment", "hdc-1"]
+labels: ["amendment", "aiisp-1"]
 body:
   - type: input
     id: target
     attributes:
       label: Target spec
-      description: Which spec is this amendment for? (HDC-1, or proposing HDC-2 / HDC-3 / etc.)
-      placeholder: "HDC-1"
+      description: Which spec is this amendment for? (AIISP-1, or proposing AIISP-2 / AIISP-3 / etc.)
+      placeholder: "AIISP-1"
     validations:
       required: true
   - type: textarea
