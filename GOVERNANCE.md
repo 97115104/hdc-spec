@@ -40,7 +40,7 @@ Each version is tagged in git as `vMAJOR.MINOR` (e.g. `v0.1`).
 
 ## Forking
 
-The specification text is licensed under [CC BY 4.0](./LICENSE-SPEC), which means any party may fork this repository and publish a competing or derivative standard. The editor encourages competing proposals as a healthy part of the design process and will link to substantive forks from this README.
+The specification text is licensed under [CC BY 4.0](./LICENSE), which means any party may fork this repository and publish a competing or derivative standard. The editor encourages competing proposals as a healthy part of the design process and will link to substantive forks from this README.
 
 ## Conflicts of interest
 

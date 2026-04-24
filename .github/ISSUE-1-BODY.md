@@ -1,6 +1,6 @@
 # AIISP-1 v0.1 — Public review and comment thread
 
-> **Specification:** [`aiisp-1.md`](https://github.com/97115104/aiisp-spec/blob/main/aiisp-1.md) · **Rendered:** <https://97115104.github.io/aiisp-spec/> · **Status:** Draft (v0.1, April 2026) · **Editor:** Austin Harshberger ([`x@97115104.com`](mailto:x@97115104.com)) · **License:** CC BY 4.0 (text), MIT (reference code)
+> **Specification:** [`aiisp-1.md`](https://github.com/97115104/aiisp-spec/blob/main/spec/aiisp-1.md) · **Rendered:** <https://97115104.github.io/aiisp-spec/> · **Status:** Draft (v0.1, April 2026) · **Editor:** Austin Harshberger ([`x@97115104.com`](mailto:x@97115104.com)) · **License:** CC BY 4.0 (text), MIT (reference code)
 
 This issue is the **primary public-comment thread** for AIISP-1, the first specification in the Human Data Collective standards family. It defines a minimal, opt-in HTTP standard for declaring and settling the energy, environmental, and human-attribution components of a single LLM inference request.
 
@@ -33,7 +33,7 @@ If you are commenting in a professional capacity or on behalf of an organization
 
 A Client opts a request into AIISP settlement by sending an `X-AIISP-Token` header carrying the Provider's Branded Inference Token (BIT) address. The Provider, on the response, returns a base64url-encoded JSON `X-AIISP-Cost` record breaking the request's price into four named lines (energy, environmental, premium, total) plus a fifth `aiisp.share_usd` line, and either settles the corresponding amounts on-chain immediately (`realtime`) or batches them at a published cadence (`deferred`). Distribution of the AIISP share to creator, peer-reviewer, and operations pools happens atomically inside an on-chain settlement contract on Base. Providers that do not implement the standard are unaffected; clients that do not implement it are unaffected; the wire format is designed to be added to any existing HTTP inference API in a single afternoon.
 
-Full normative text is in [`aiisp-1.md`](https://github.com/97115104/aiisp-spec/blob/main/aiisp-1.md). A worked end-to-end example for a 1,000-token request is in Appendix A of the spec.
+Full normative text is in [`aiisp-1.md`](https://github.com/97115104/aiisp-spec/blob/main/spec/aiisp-1.md). A worked end-to-end example for a 1,000-token request is in Appendix A of the spec.
 
 ---
 

@@ -1,3 +1,0 @@
-# Symlink/copy the spec into the Pages directory at build time.
-# The GitHub Pages workflow (.github/workflows/pages.yml) copies aiisp-1.md
-# into docs/ so the static site can fetch it as a sibling resource.

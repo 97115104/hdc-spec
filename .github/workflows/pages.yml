@@ -27,12 +27,12 @@ jobs:
       - name: Stage Pages content
         run: |
           mkdir -p _site
-          cp docs/index.html _site/index.html
-          cp docs/spec.html  _site/spec.html
-          cp aiisp-1.md        _site/aiisp-1.md
-          cp README.md       _site/README.md
-          cp GOVERNANCE.md   _site/GOVERNANCE.md
-          cp CONTRIBUTING.md _site/CONTRIBUTING.md
+          cp docs/index.html  _site/index.html
+          cp docs/spec.html   _site/spec.html
+          cp spec/aiisp-1.md  _site/aiisp-1.md
+          cp README.md        _site/README.md
+          cp GOVERNANCE.md    _site/GOVERNANCE.md
+          cp CONTRIBUTING.md  _site/CONTRIBUTING.md
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

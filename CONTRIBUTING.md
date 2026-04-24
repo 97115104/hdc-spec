@@ -22,7 +22,7 @@ For comments that benefit from being tracked individually, open a new issue usin
 
 ### 3. Submit a pull request against the spec
 
-For textual changes to [`aiisp-1.md`](./aiisp-1.md), open a pull request directly. Pull requests should:
+For textual changes to [`aiisp-1.md`](./spec/aiisp-1.md), open a pull request directly. Pull requests should:
 
 - Touch only one logical change per PR (typo fixes can be batched).
 - Include a short rationale in the PR description, ideally referencing the issue that motivated it.
@@ -95,7 +95,7 @@ The editor commits to acknowledging every issue and pull request within 14 days.
 
 ## Provenance and attestation
 
-Every accepted change to `aiisp-1.md` will be attested under the [`attest` v3](https://attest.97115104.com) specification and recorded in the spec's revision history. By contributing you agree that your contribution may be redistributed under the spec's [CC BY 4.0](./LICENSE-SPEC) license and that your name and contribution may be recorded in the public attestation chain.
+Every accepted change to `aiisp-1.md` will be attested under the [`attest` v3](https://attest.97115104.com) specification and recorded in the spec's revision history. By contributing you agree that your contribution may be redistributed under the spec's [CC BY 4.0](./LICENSE) license and that your name and contribution may be recorded in the public attestation chain.
 
 ## Code of conduct
 

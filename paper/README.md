@@ -18,7 +18,7 @@ The paper's public home, with section-by-section commentary, is
 
 Open a PR against this directory for prose, citation, or structural
 suggestions. For substantive specification changes that affect AIISP-1 itself,
-prefer a PR against `../aiisp-1.md` or the
+prefer a PR against `../spec/aiisp-1.md` or the
 [tracking issue](https://github.com/97115104/aiisp-spec/issues/1).
 
 ## Building

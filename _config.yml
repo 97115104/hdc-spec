@@ -7,12 +7,11 @@ url: "https://97115104.github.io"
 baseurl: "/aiisp-spec"
 
 exclude:
-  - ISSUE-1-BODY.md
   - CITATION.cff
   - CODE_OF_CONDUCT.md
   - CONTRIBUTING.md
   - SECURITY.md
   - LICENSE-CODE
-  - LICENSE-SPEC
   - "*.sh"
+  - paper/
   - vendor/
