@@ -6,11 +6,13 @@ This issue is the **primary public-comment thread** for AIISP-1, the first speci
 
 The draft is published in the spirit of the early internet RFCs: short, composable, opt-in, and owned by no single party. It is **not** a ratified standard. It is a starting point that I am circulating openly so that the people most affected by its decisions can shape it before any frontier provider, regulator, or contributor pool is asked to commit to anything.
 
+The companion paper, *The Human Data Collective*, provides the full motivation and design rationale. You can read it and leave inline comments — without a GitHub account — at **<https://humandatacollective.org>**. Paper source and spec source both live in [this repository](https://github.com/97115104/aiisp-spec), so proposed edits to either go through the same pull-request process.
+
 ---
 
 ## How to comment
 
-Please use the channel that fits your comment. All four are read.
+Please use the channel that fits your comment. All channels are read.
 
 | If you want to… | Use this |
 | --- | --- |
@@ -18,7 +20,9 @@ Please use the channel that fits your comment. All four are read.
 | File a structured objection against a numbered section | [New **Comment** issue](https://github.com/97115104/aiisp-spec/issues/new?template=comment.yml) |
 | Propose a substantive amendment, new header, or new behaviour | [New **Amendment** issue](https://github.com/97115104/aiisp-spec/issues/new?template=amendment.yml) |
 | Report a typo, broken link, or arithmetic error | [New **Errata** issue](https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml) |
-| Suggest specific text | Open a [Pull Request](https://github.com/97115104/aiisp-spec/pulls) against `aiisp-1.md` |
+| Suggest specific text in the spec | Open a [Pull Request](https://github.com/97115104/aiisp-spec/pulls) against `aiisp-1.md` |
+| Comment on the companion paper (no GitHub account needed) | Select text at **[humandatacollective.org](https://humandatacollective.org)** and attach an inline comment |
+| Suggest prose or citation changes to the companion paper | Open a [Pull Request](https://github.com/97115104/aiisp-spec/pulls) against `paper/human-data-collective.md` |
 | Comment privately (conflict of interest, security) | Email the editor at [`x@97115104.com`](mailto:x@97115104.com) |
 
 If you are commenting in a professional capacity or on behalf of an organization that would be affected by this standard (frontier provider, infrastructure operator, regulator, civil-society group, worker organization), please **disclose that affiliation in your comment**. The structured templates ask for this explicitly. See [`CONTRIBUTING.md`](https://github.com/97115104/aiisp-spec/blob/main/CONTRIBUTING.md) and [`GOVERNANCE.md`](https://github.com/97115104/aiisp-spec/blob/main/GOVERNANCE.md) for the full process.

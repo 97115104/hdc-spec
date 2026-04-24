@@ -2,9 +2,13 @@
 
 Thank you for taking the time to comment on the Artificial Intelligence Inference Standards Protocol. This document is published for open review, and substantive feedback is the primary input that will shape later drafts.
 
-## Three ways to contribute
+This repository has **two things you can contribute to**: the **spec** (`aiisp-1.md`) and the **companion paper** (`paper/human-data-collective.md`). Each has its own preferred channel.
 
-### 1. Discuss
+---
+
+## Contributing to the spec (aiisp-1.md)
+
+### 1. Discuss on issue #1
 
 The primary public discussion thread for AIISP-1 v0.1 is **[issue #1](https://github.com/97115104/aiisp-spec/issues/1)**. Reply there with prose comments, questions, alternative framings, or links to related work. No permission needed.
 
@@ -16,7 +20,7 @@ For comments that benefit from being tracked individually, open a new issue usin
 - **Amendment** — a proposal for a new feature, header, or behaviour.
 - **Errata** — a typo, broken link, arithmetic error, or factual mistake in the published draft.
 
-### 3. Submit a pull request
+### 3. Submit a pull request against the spec
 
 For textual changes to [`aiisp-1.md`](./aiisp-1.md), open a pull request directly. Pull requests should:
 
@@ -25,7 +29,58 @@ For textual changes to [`aiisp-1.md`](./aiisp-1.md), open a pull request directl
 - Preserve the existing prose voice (long, comma-stitched, declarative; RFC 2119 keywords in normative sections).
 - Update the **Revision history** appendix if the change is substantive.
 
-## What "substantive" means
+---
+
+## Contributing to the companion paper
+
+*The Human Data Collective* is the long-form motivation document for AIISP-1. Its source lives in [`paper/`](./paper/) so that editorial pull requests go through the same workflow as the spec.
+
+### Option A — comment at humandatacollective.org (no GitHub account needed)
+
+The paper is published with inline section-level comments at **<https://humandatacollective.org>**. Select any span of text on the page and a composer will appear. Comments are public and threaded. This is the lowest-friction path for readers who do not want to use GitHub.
+
+### Option B — open a pull request
+
+The canonical source of the paper is the LaTeX file [`paper/human-data-collective.tex`](./paper/human-data-collective.tex). **Prefer editing `.tex` for anything involving figures, tables, diagrams, equations, or citation formatting**, since those are much cleaner to express in LaTeX than in Markdown. If you are not familiar with LaTeX, editing [`paper/human-data-collective.md`](./paper/human-data-collective.md) is an acceptable fallback — the editor will reconcile the Markdown diff into the `.tex` source before merging.
+
+Pull requests to the paper should:
+
+- Include a short rationale explaining the change.
+- Cite sources for any new factual claims.
+- Keep changes focused; one logical change per PR is preferred.
+
+#### Building the PDF locally
+
+Requires a TeX Live or MacTeX distribution (any modern install). From the repository root:
+
+```bash
+cd paper
+./generate-latex.sh
+```
+
+This runs `pdflatex` three times to resolve cross-references and produces `paper/human-data-collective.pdf`. Pass a different basename as an argument if you are working on a renamed file:
+
+```bash
+./generate-latex.sh my-draft
+```
+
+If `pdflatex` is not on your PATH, install it with:
+
+```bash
+# macOS
+brew install --cask mactex-no-gui
+
+# Debian / Ubuntu
+sudo apt install texlive-latex-extra
+```
+
+### Option C — file an errata issue
+
+Factual errors, broken citations, or arithmetic mistakes in the paper can be filed as an [Errata issue](https://github.com/97115104/aiisp-spec/issues/new?template=errata.yml). Please note in the issue body whether the erratum is in the spec or the paper.
+
+---
+
+## What "substantive" means (spec)
 
 A change is substantive if it would alter the behaviour of a conformant implementation. Substantive changes require either:
 
