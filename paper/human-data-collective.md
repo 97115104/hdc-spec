@@ -266,7 +266,7 @@ The energy line is computed from actual GPU-seconds consumed multiplied by a pub
 
 # Appendix C — A Brief for Regulators
 
-*Questions and follow-up: `regulators@97115104.com`*
+*Questions and follow-up: `regulators@humandatacollective.org`*
 
 **What is being proposed.** A voluntary, opt-in inference standard that adds three measurable line items to every billed inference request: energy, environmental remediation, and a small share of provider premium routed to the people whose work trained the model. All settlement runs on a public blockchain (Base, an Ethereum L2), so every dollar collected and every credit retired is independently auditable.
 
@@ -428,7 +428,7 @@ This appendix collects, in one place, every named individual and named organizat
 
 # Interested in Contributing?
 
-The AIISP-1 specification, this paper, and the reference implementation are developed openly. Contributions, issues, and pull requests are welcomed at the standard's repository, <https://github.com/97115104/aiisp-spec>, with an open tracking issue for this draft at <https://github.com/97115104/aiisp-spec/issues/1>, and direct correspondence about partnership, pilot funding, worker-organization or community co-authorship, and editorial review can be addressed to `contribute@97115104.com`.
+The AIISP-1 specification, this paper, and the reference implementation are developed openly. Contributions, issues, and pull requests are welcomed at the standard's repository, <https://github.com/97115104/aiisp-spec>, with an open tracking issue for this draft at <https://github.com/97115104/aiisp-spec/issues/1>, and direct correspondence about partnership, pilot funding, worker-organization or community co-authorship, and editorial review can be addressed to `contribute@humandatacollective.org`.
 
 ---
 

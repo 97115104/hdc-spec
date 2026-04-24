@@ -1,0 +1,19 @@
+Creative Commons Attribution 4.0 International
+
+This repository contains two separately licensed components:
+
+  Specification text (aiisp-1.md, any future aiisp-N.md, and paper/)
+  → Creative Commons Attribution 4.0 International (CC BY 4.0)
+  → Full terms: LICENSE-SPEC  |  https://creativecommons.org/licenses/by/4.0/legalcode
+
+  Reference implementation (source code)
+  → MIT License
+  → Full terms: LICENSE-CODE
+
+You are free to share, copy, redistribute, adapt, remix, transform, and build
+upon the specification text for any purpose, even commercially, provided you
+give appropriate credit, provide a link to the license, and indicate if changes
+were made. You may not apply legal terms or technological measures that
+restrict others from doing anything this license permits.
+
+Copyright (c) 2026 Austin Harshberger / Happy Stack Calculus LLC
