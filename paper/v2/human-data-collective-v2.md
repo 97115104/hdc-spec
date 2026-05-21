@@ -1,6 +1,6 @@
-# The Human Data Collective: AI, Data, and Distributed Compute
+# The Human Data Collective v2: A Revised Architecture for Contributor Owned Machine Intelligence
 
-*A contributor aligned inference standard for public good artificial intelligence*
+*With provider independent data, compute, and feedback layers for public good AI*
 
 Austin Harshberger  
 Happy Stack Calculus · Los Angeles County  
@@ -350,7 +350,7 @@ Los Angeles County, May 2026
 
 [github2026usagebilling] M. Rodriguez. GitHub Copilot is moving to usage-based billing. *The GitHub Blog*, April 27, 2026. <https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/>
 
-[harshberger2026hdcv1] A. Harshberger. *The Human Data Collective: A Standard for Open, Sustainable, and Equitable Artificial Intelligence*. Happy Stack Calculus, April 2026. <https://github.com/97115104/aiisp-spec/blob/main/paper/v1/human-data-collective.pdf>
+[harshberger2026hdcv1] A. Harshberger. *The Human Data Collective: A Standard for Open, Sustainable, and Equitable Machine Intelligence With Transparency and Compensation Optionality for Large Language Model Inference*. SSRN, April 24, 2026. <http://dx.doi.org/10.2139/ssrn.6639918>
 
 [hao2025empire] K. Hao. *Empire of AI: Dreams and Nightmares in Sam Altman's OpenAI*. Penguin Publishing Group, 2025.
 

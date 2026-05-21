@@ -35,7 +35,7 @@
 \pagenumbering{roman}
 \twocolumn[{%
 \begin{center}
-{\LARGE\bfseries The Human Data Collective:\\[3pt]A Standard for Open, Sustainable,\\[2pt]and Equitable Artificial Intelligence\par}
+{\LARGE\bfseries The Human Data Collective:\\[3pt]A Standard for Open, Sustainable,\\[2pt]and Equitable Machine Intelligence\par}
 \vspace{6pt}
 {\normalsize\itshape With transparency and compensation optionality for large language model inference\par}
 \vspace{10pt}
@@ -55,9 +55,10 @@ Several of the biggest challenges plaguing the development and utilization of la
 \end{minipage}
 \end{center}
 
-\vspace{12pt}
+\vspace{4pt}
 \begin{center}
-\resizebox{0.40\textwidth}{!}{%
+{\scriptsize\bfseries Figure i. Human Data Collective architecture}\\[5pt]
+\resizebox{0.58\textwidth}{!}{%
 \begin{tikzpicture}[
     font=\scriptsize,
     box/.style={rectangle, draw=black, thick, fill=white, text width=2.2cm, align=center, minimum height=0.8cm, rounded corners, inner sep=3pt},
@@ -87,34 +88,15 @@ Several of the biggest challenges plaguing the development and utilization of la
 \draw[arrow] (smart.south) -- (eco.north);
 \end{tikzpicture}%
 }
-\end{center}
-
-\vspace{10pt}
-\begin{center}
-\fbox{\parbox{0.78\textwidth}{%
-\scriptsize
-\textbf{attest} \texttt{v3.0} \hfill \texttt{2026-04-22-77bcda}\\[3pt]
-\textit{Human--AI collaboration.}\\[3pt]
-{\renewcommand{\arraystretch}{1.0}%
-\begin{tabular}{@{}lp{0.56\textwidth}@{}}
-\textbf{Content} & The Human Data Collective \\
-\textbf{Author} & A.~Harshberger \\
-\textbf{AI collaborators} & Claude Opus 4.7, Gemini 3.1 Pro (Preview) \\
-\textbf{Role} & collaborated (multi-prompt iterative authoring; human directed structure, argument, and final wording; AI assisted with drafting, citation lookup, LaTeX formatting, and revision under human review) \\
-\textbf{Authorship} & collab \\
-\textbf{Prompt type} & multi-prompt \\
-\textbf{Prompt summary} & \textit{multi-prompt iterative authoring of LaTeX paper proposing a decentralized human data network for LLM training} \\
-\textbf{Platform} & GitHub Copilot in VS Code \\
-\textbf{Timestamp} & 2026-04-22T04:35:54.795Z \\
-\textbf{Signature} & HMAC-SHA256 \texttt{936e2483\dots a7dd9a1f} \\
-\textbf{Verify} & \url{https://attest.97115104.com/s/r11xzkrm} \\
-\end{tabular}}
-}}
+\\[8pt]
+\begin{minipage}{0.78\textwidth}
+\scriptsize\itshape Figure note. This diagram shows HDC's v1 operating loop at the role and settlement level. Creators and peer reviewers supply attested training data; frontier and open-source model paths route request baselines into the smart contract; the frontier premium share returns to the Collective for redistribution.
+\end{minipage}
 \end{center}
 
 \vspace{6pt}
 \begin{center}
-{\scriptsize\copyright\ 2026 Happy Stack Calculus LLC \quad$\cdot$\quad CC BY-NC-ND 4.0 \quad$\cdot$\quad \url{https://creativecommons.org/licenses/by-nc-nd/4.0/}\par}
+{\scriptsize\copyright\ 2026 Happy Stack Calculus LLC \quad$\cdot$\quad Draft for public comment\par}
 \end{center}
 }]
 
@@ -200,7 +182,7 @@ Requests \emph{without} the headers behave exactly as they do today. Requests \e
 
 Large language models \emph{are} the data that was used to create them \citep{bender2021parrots}. This framing draws directly on Bender, Gebru, McMillan-Major, and Shmitchell's \emph{Stochastic Parrots}, which argued, well in advance of the current frontier race, that the corpora used to train large language models encode the social and economic conditions of their collection, and that those conditions, including who was paid, who was credited, and what was excluded, propagate forward into every output the resulting model produces. If frontier models are trained mostly on public and freely accessible material such as millions of public GitHub repositories, Wikipedia, and free-to-use educational databases intended to benefit all, why then are the largest companies, namely Microsoft, OpenAI, Anthropic, and Google, privatizing access to that data and charging the people who created it for the privilege? Material that is not clearly marked as open source but was nonetheless used for training before it was knowable, including copyrighted books, personal blog posts, YouTube transcripts, and other socially shared content on the internet, is rarely attributed to its original creators and almost never fairly compensated.
 
-The value and broad applicability of large language models has grown exponentially over the past several years to make them one of the most polarizing and disproportionately impactful technologies ever to come to fruition. Despite the early stage of these systems as consumer products through APIs, chat interfaces, image generators, and video generators, the quality of their responses remains questionable, with internal frontier-lab testing showing that on so-called closed-domain prompts, where the correct answer is supplied directly in the prompt and any deviation from it is definitionally a hallucination, an early version of GPT-4 fabricated answers roughly 30 percent of the time \citep[ch.~11]{hao2025empire}.\footnote{In this paper \emph{hallucination} is used in its technical sense, namely fluent and internally plausible model output that is factually incorrect or unverifiable against any external source, including fabricated citations, statistics, and quotations; see the Glossary entry on page~\pageref{sec:appendix-glossary} for a fuller definition.} The publicly released system card for the most widely deployed model in the same family continues to report meaningful hallucination rates across its safety evaluations \citep{openai2024gpt4osystemcard}, and recent peer-reviewed work formalizes why this happens, demonstrating that under standard pretraining and reinforcement-learning-from-human-feedback objectives, models are statistically incentivized to guess \citep{kalai2025whyhallucinate}. Most of the quality of these models is tied directly to the volume and provenance of the data used to train them \citep{kaplan2020scaling}, with the largest of the frontier models' value being directly proportional to the amount of data and compute available in their development. The current winners, unsurprisingly, are the biggest names in technology, namely Meta, Alphabet, Microsoft, and X, who either directly, in the case of Meta, Alphabet, and X, or indirectly, in the case of OpenAI and Anthropic through Microsoft via GitHub, train their models on their users' data or on publicly accessible, free-to-use, easy-to-obtain-without-accountability internet sources.
+The value and broad applicability of large language models has grown exponentially over the past several years to make them one of the most polarizing and disproportionately impactful technologies ever to come to fruition. Despite the early stage of these systems as consumer products through APIs, chat interfaces, image generators, and video generators, the quality of their responses remains questionable, with internal frontier-lab testing showing that on so-called closed-domain prompts, where the correct answer is supplied directly in the prompt and any deviation from it is definitionally a hallucination, an early version of GPT-4 fabricated answers roughly 30 percent of the time \citep[ch.~11]{hao2025empire}.\footnote{In this paper \emph{hallucination} is used in its technical sense, namely fluent and internally plausible model output that is factually incorrect or unverifiable against any external source, including fabricated citations, statistics, and quotations; see the Glossary entry on page~\pageref{sec:appendix-glossary} for a fuller definition.} The publicly released system card for the most widely deployed model in the same family continues to report meaningful hallucination rates across its safety evaluations \citep{openai2024gpt4osystemcard}, and recent peer-reviewed work formalizes why this happens, demonstrating that under standard pretraining and reinforcement learning from human feedback objectives, models are statistically incentivized to guess \citep{kalai2025whyhallucinate}. Most of the quality of these models is tied directly to the volume and provenance of the data used to train them \citep{kaplan2020scaling}, with the largest of the frontier models' value being directly proportional to the amount of data and compute available in their development. The current winners, unsurprisingly, are the biggest names in technology, namely Meta, Alphabet, Microsoft, and X, who either directly, in the case of Meta, Alphabet, and X, or indirectly, in the case of OpenAI and Anthropic through Microsoft via GitHub, train their models on their users' data or on publicly accessible, free-to-use, easy-to-obtain-without-accountability internet sources.
 
 The internet itself is the most relevant precedent for the benefits of broad, free, and general access. At the time of its creation, the argument to privatize and sell access to it was actually stronger than the equivalent argument for software-only large language models, in large part because running the internet and providing access to it requires physical servers and networked infrastructure that themselves carry inherent energy and capitalization costs \citep{leiner2009history}. Despite this, the internet flourished as a free and open tool through government grants and research institutions, ushering in a new era of exploding value for both individuals and society and precipitating the creation of some of the largest companies that have ever existed, notably Alphabet's Google search engine, which made its money in large part by surfacing internet data and ranking it according to a combination of marketing spend and user interest. OpenAI itself was originally founded as a non-profit research company with the explicit remit to advance digital intelligence in the way most likely to benefit humanity as a whole \citep{openai2015intro}, and Anthropic was launched as a public benefit corporation focused on artificial intelligence safety and the long-term interests of society \citep{anthropic2021intro}. However, as both organizations grew, the cost of developing frontier models grew vertically with them, encouraging both to take on capped-profit subsidiaries and accept investment from organizations whose privatization and monetization goals are in many ways antithetical to their original remit. The resulting discord caused real strife across the artificial intelligence industry, fracturing the field into two competing camps \citep[ch.~13]{hao2025empire}, and culminated in the two most widely used frontier consumer products today, Claude and ChatGPT, being closed source. Unlike the internet, which was open-sourced and freely accessible, these frontier models cannot be inspected, reproduced, or freely run for inference by the same communities whose data trained them.
 
@@ -239,13 +221,13 @@ Aggregated industry-wide, training and inference together emit greenhouse gases 
 
 The history of large language models is, in effect, a history of data, as mentioned before, but more specifically, it is a history of \emph{murky data}. Scaling laws as outlined in research published by several sources, notably Dwarkesh Patel's\footnote{Dwarkesh Patel is an independent technology podcaster whose long-form interviews with leading artificial-intelligence researchers form the basis of the cited oral history; see \url{https://www.dwarkesh.com/}.} \emph{The Scaling Era: An Oral History of AI, 2019--2025} \citep{patel2025scaling} and Kaplan et al.'s foundational paper on neural language models \citep{kaplan2020scaling}, establish that the quality of a trained system is primarily a function of the volume and distribution of the data on which it was trained irrespective of architectural novelty in the model itself, and Karen Hao's account of the internal calculus at the frontier labs reinforces this from the operational side, with the decisive quality jumps at each generation tracing back to deliberate data-filtering and data-acquisition programs \citep[pp.~174, 177]{hao2025empire}. Patel's oral history records the same observation in the practitioners' own words, with Jared Kaplan\footnote{Jared Kaplan is a co-founder and chief science officer of Anthropic and a lead author of the foundational scaling-laws paper for neural language models cited elsewhere in this section.} describing scaling as ``this relation we've noticed: as you make AI systems larger\,---\,increasing the number of parameters they have, training on more data, or increasing the total amount of compute used for training\,---\,you get really, really predictable trends for the performance of these systems'' \citep[p.~20]{patel2025scaling}, and Demis Hassabis\footnote{Demis Hassabis is co-founder and chief executive officer of Google DeepMind and a 2024 Nobel laureate in Chemistry, recognized jointly with John Jumper for the AlphaFold protein-structure prediction system.} flagging data curation as the field's emerging bottleneck, noting that ``we're still in the nascent stage of [optimal] data curation and data analysis and analyzing the holes in our data distribution'' \citep[pp.~45--46]{patel2025scaling}. The practical consequence is that the most significant single variable in the development of the frontier models used today was the decision, made early and almost universally, to treat the open internet as a free raw material and to scrape it without permission, attribution, or compensation.
 
-The costs of that decision are already visible and are distributed along three distinct surfaces. The first is bias and representational harm, which \emph{Stochastic Parrots} documented in detail several years ahead of the current race and which is now well-established in peer-reviewed literature, namely that an uncurated internet corpus encodes the historical, racial, gender, and geographic biases of the population that was online during its collection, and that a model trained on such a corpus reproduces and in many cases amplifies those biases in its outputs \citep{bender2021parrots}. The second is quality and factual reliability, which manifests to users as hallucination. Recent formal work establishes that under standard pretraining and reinforcement-learning-from-human-feedback objectives, models trained on low-quality, contradictory, or thinly-attributed data are statistically incentivized to guess and do not abstain when uncertain \citep{kalai2025whyhallucinate}; further, successive generations of synthetic or recycled data compound the problem by collapsing the diversity of the underlying distribution \citep{shumailov2024modelcollapse}. The third is the hidden labor cost of making the scraped corpus usable at all, most of which is absorbed by reinforcement-learning-from-human-feedback workforces operating on outsourced contracts in Kenya, the Philippines, and elsewhere, where workers have reported sustained exposure to extreme, violent, and sexually explicit material \citep[ch.~9]{hao2025empire}. In Chapter~9 of \emph{Empire of AI}, Karen Hao documents the subsequent shift of this work toward more highly-educated workers such as doctors, engineers, and lawyers as the easier prompt categories saturate, a migration that is best read as a confirmation that the quality of a model is ultimately bounded by the quality and compensation of the humans who curate its training data. Patel's account makes the same point structurally, with Leopold Aschenbrenner\footnote{Leopold Aschenbrenner is a former member of OpenAI's Superalignment team and the author of the widely-circulated essay collection \emph{Situational Awareness}; see \url{https://situational-awareness.ai/}.} observing that ``RLHF is equivalent to increasing the model size 100 times in terms of the resulting increase in human evaluators' preference ratings'' \citep[p.~35]{patel2025scaling}, which is to say that the human-feedback layer is doing as much capability work as several order-of-magnitude jumps in compute.
+The costs of that decision are already visible and are distributed along three distinct surfaces. The first is bias and representational harm, which \emph{Stochastic Parrots} documented in detail several years ahead of the current race and which is now well-established in peer-reviewed literature, namely that an uncurated internet corpus encodes the historical, racial, gender, and geographic biases of the population that was online during its collection, and that a model trained on such a corpus reproduces and in many cases amplifies those biases in its outputs \citep{bender2021parrots}. The second is quality and factual reliability, which manifests to users as hallucination. Recent formal work establishes that under standard pretraining and reinforcement learning from human feedback objectives, models trained on low-quality, contradictory, or thinly-attributed data are statistically incentivized to guess and do not abstain when uncertain \citep{kalai2025whyhallucinate}; further, successive generations of synthetic or recycled data compound the problem by collapsing the diversity of the underlying distribution \citep{shumailov2024modelcollapse}. The third is the hidden labor cost of making the scraped corpus usable at all, most of which is absorbed by reinforcement learning from human feedback workforces operating on outsourced contracts in Kenya, the Philippines, and elsewhere, where workers have reported sustained exposure to extreme, violent, and sexually explicit material \citep[ch.~9]{hao2025empire}. In Chapter~9 of \emph{Empire of AI}, Karen Hao documents the subsequent shift of this work toward more highly-educated workers such as doctors, engineers, and lawyers as the easier prompt categories saturate, a migration that is best read as a confirmation that the quality of a model is ultimately bounded by the quality and compensation of the humans who curate its training data. Patel's account makes the same point structurally, with Leopold Aschenbrenner\footnote{Leopold Aschenbrenner is a former member of OpenAI's Superalignment team and the author of the widely-circulated essay collection \emph{Situational Awareness}; see \url{https://situational-awareness.ai/}.} observing that ``RLHF is equivalent to increasing the model size 100 times in terms of the resulting increase in human evaluators' preference ratings'' \citep[p.~35]{patel2025scaling}, which is to say that the human-feedback layer is doing as much capability work as several order-of-magnitude jumps in compute.
 
-The human cost of that labor, when traced to the actual people performing it, is the part of the current pipeline that is hardest to defend on any reading. Karen Hao's reporting on the Sama contract that supplied OpenAI's early content-moderation and reinforcement-learning-from-human-feedback pipelines documents Kenyan workers paid on the order of US\$1.32 to US\$2.00 per hour to read, label, and rank the most extreme material the open internet produces, including child sexual abuse material, descriptions of bestiality and incest, and detailed depictions of torture and self-harm, on quotas that left no meaningful recovery time between exposures \citep[ch.~9]{hao2025empire}. Workers later reported sustained psychological injury consistent with post-traumatic stress, including intrusive imagery, broken marriages, substance dependence, and inability to be physically present with their own children. As a result, the contract with Sama was terminated early by OpenAI when the conditions became public, with no comparable mental-health infrastructure put in place for the workers who had already been exposed \citep[ch.~9]{hao2025empire}.
+The human cost of that labor, when traced to the actual people performing it, is the part of the current pipeline that is hardest to defend on any reading. Karen Hao's reporting on the Sama contract that supplied OpenAI's early content-moderation and reinforcement learning from human feedback pipelines documents Kenyan workers paid on the order of US\$1.32 to US\$2.00 per hour to read, label, and rank the most extreme material the open internet produces, including child sexual abuse material, descriptions of bestiality and incest, and detailed depictions of torture and self-harm, on quotas that left no meaningful recovery time between exposures \citep[ch.~9]{hao2025empire}. Workers later reported sustained psychological injury consistent with post-traumatic stress, including intrusive imagery, broken marriages, substance dependence, and inability to be physically present with their own children. As a result, the contract with Sama was terminated early by OpenAI when the conditions became public, with no comparable mental-health infrastructure put in place for the workers who had already been exposed \citep[ch.~9]{hao2025empire}.
 
-The structural conclusion is that reinforcement-learning-from-human-feedback at its current scale is largely a remediation cost imposed by the decision to train on murky data in the first place. As Hao puts the point directly, the apparatus is needed primarily because the underlying corpus is uncurated and contradictory; ``RLHF ceases to be necessary with higher quality data,'' or rather, the share of it that is genuinely needed shrinks toward the share that is genuinely capability-enhancing \citep[p.~245]{hao2025empire}.
+The structural conclusion is that reinforcement learning from human feedback at its current scale is largely a remediation cost imposed by the decision to train on murky data in the first place. As Hao puts the point directly, the apparatus is needed primarily because the underlying corpus is uncurated and contradictory; ``RLHF ceases to be necessary with higher quality data,'' or rather, the share of it that is genuinely needed shrinks toward the share that is genuinely capability-enhancing \citep[p.~245]{hao2025empire}.
 
-A useful corollary of this observation is that if the humans curating training data were compensated fairly and selected for the relevant expertise from the outset, a large portion of the reinforcement-learning-from-human-feedback apparatus currently used to paper over low-quality data would become unnecessary \citep[p.~245]{hao2025empire}. The present supply chain for RLHF'd data is dominated by a small number of vendors including Scale AI, Appen, and their peers, who extract huge sums of money per year in aggregate while producing datasets whose documented deficiencies are precisely the deficiencies this paper is attempting to address with higher quality data and fair incentives.
+A useful corollary of this observation is that if the humans curating training data were compensated fairly and selected for the relevant expertise from the outset, a large portion of the reinforcement learning from human feedback apparatus currently used to paper over low-quality data would become unnecessary \citep[p.~245]{hao2025empire}. The present supply chain for RLHF'd data is dominated by a small number of vendors including Scale AI, Appen, and their peers, who extract huge sums of money per year in aggregate while producing datasets whose documented deficiencies are precisely the deficiencies this paper is attempting to address with higher quality data and fair incentives.
 
 At the same time, vast reserves of the highest-quality human-generated data are currently unavailable to frontier training for reasons of licensing, copyright, and platform terms of service. The creator economies on platforms such as YouTube, Twitch, Substack, Udemy, LinkedIn Learning, Patreon, and OnlyFans represent sustained, category-rich, often subject-matter-expert human output in volumes that dwarf most open-web corpora, produced by contributors who already expect and receive compensation for their work and who could in principle opt in to a data-licensing arrangement on comparable terms. A standard that routes verifiable compensation to identifiable contributors is the precondition for any of this material to become usable at scale, and the absence of such a standard is a principal reason the current generation of models is trained disproportionately on the material that is easiest to access and often murky at best.
 
@@ -309,7 +291,7 @@ Auditable, categorized, human-generated training data enables a deterministic re
 \section{For the Artificial Intelligence Industry}
 \label{sec:why-ai}
 
-The architecture proposed here maps almost perfectly onto the initiatives and goals of every major contingent in the artificial intelligence development space. The capability-focused camp, sometimes referred to as the AGI maximalists, gets a renewable supply of high-quality, behaviorally rich, responsibly sourced data to train on and to push closer to their stated goal of reaching general intelligence. The safety-focused camp gets the auditable provenance, category-level controls, and capability-tracking tools they have been asking for, including the ability to track emergent capabilities by training set and to completely recuse themselves of the human-psychology liabilities created by current reinforcement-learning-from-human-feedback supply chains operated by firms such as Scale AI and Appen. A third constituency, exemplified by Bender, Gebru, and Hao, holds that the current scale of these systems is itself a harm and that no amount of attribution or environmental-cost disclosure is a substitute for slowing or halting deployment; the Collective does not resolve that disagreement, and it does not pretend to, but it does give that constituency a per-request audit trail with which to make its case in measurable terms. The structure also dissolves a substantial portion of the legal and reputational exposure currently created by training on uncurated or copyright-encumbered data.
+The architecture proposed here maps almost perfectly onto the initiatives and goals of every major contingent in the artificial intelligence development space. The capability-focused camp, sometimes referred to as the AGI maximalists, gets a renewable supply of high-quality, behaviorally rich, responsibly sourced data to train on and to push closer to their stated goal of reaching general intelligence. The safety-focused camp gets the auditable provenance, category-level controls, and capability-tracking tools they have been asking for, including the ability to track emergent capabilities by training set and to completely recuse themselves of the human-psychology liabilities created by current reinforcement learning from human feedback supply chains operated by firms such as Scale AI and Appen. A third constituency, exemplified by Bender, Gebru, and Hao, holds that the current scale of these systems is itself a harm and that no amount of attribution or environmental-cost disclosure is a substitute for slowing or halting deployment; the Collective does not resolve that disagreement, and it does not pretend to, but it does give that constituency a per-request audit trail with which to make its case in measurable terms. The structure also dissolves a substantial portion of the legal and reputational exposure currently created by training on uncurated or copyright-encumbered data.
 
 \section{Considerations}
 \label{sec:considerations}
@@ -613,7 +595,7 @@ This appendix collects, in one place, every named individual and named organizat
 
 \item[Anthropic.] Frontier artificial-intelligence laboratory and developer of the Claude family of models, organized as a public benefit corporation. \url{https://www.anthropic.com/} \quad \url{https://x.com/AnthropicAI}
 
-\item[Appen.] Australian-headquartered data-annotation and reinforcement-learning-from-human-feedback vendor; cited in \S\ref{sec:murky-data} and \S\ref{sec:why-ai}. \url{https://www.appen.com/}
+\item[Appen.] Australian-headquartered data-annotation and reinforcement learning from human feedback vendor; cited in \S\ref{sec:murky-data} and \S\ref{sec:why-ai}. \url{https://www.appen.com/}
 
 \item[Audius.] Decentralized music-streaming protocol cited in Appendix~\ref{sec:appendix-standard} as a precedent for on-chain creator-share contracts. \url{https://audius.co/}
 
@@ -663,7 +645,7 @@ This appendix collects, in one place, every named individual and named organizat
 
 \item[Sama.] Data-annotation vendor whose Kenyan content-moderation contract for OpenAI is the central case study in \S\ref{sec:murky-data}. \url{https://www.sama.com/}
 
-\item[Scale AI.] United States data-annotation and reinforcement-learning-from-human-feedback vendor; cited in \S\ref{sec:murky-data} and \S\ref{sec:why-ai}. \url{https://scale.com/}
+\item[Scale AI.] United States data-annotation and reinforcement learning from human feedback vendor; cited in \S\ref{sec:murky-data} and \S\ref{sec:why-ai}. \url{https://scale.com/}
 
 \item[Stanford Institute for Human-Centered AI.] Publisher of the annual AI Index Report cited in \S\ref{sec:environmental}. \url{https://hai.stanford.edu/}
 
@@ -695,6 +677,8 @@ The AIISP-1 specification, this paper, and the reference implementation are deve
 
 \section*{Acknowledgements}
 \addcontentsline{toc}{section}{Acknowledgements}
+\begingroup
+\footnotesize
 
 This paper owes a substantial intellectual debt to Karen Hao's \emph{Empire of AI} \citep{hao2025empire}, whose on-the-ground investigation of OpenAI, its capital structure, its labor supply chain, and the communities affected by its physical build-out is drawn on throughout, and to the workers and community organizers whose testimony it records, particularly Sonia Ramos in the Atacama and the organizers of MOSACAT in Cerrillos, whose framing of territorial injustice informs the environmental argument made here. The paper also owes a debt to Dwarkesh Patel and Gavin Leech for \emph{The Scaling Era} \citep{patel2025scaling}, whose oral history of the field provided the practitioners' own framing of scaling laws, data curation, and the human-feedback bottleneck used in the data section.
 
@@ -706,24 +690,24 @@ I'd like to thank the many AI assistants and agents I have used to create this a
 
 Finally, I'd like to thank my friends and family for their support and feedback on this and countless other projects. It would not be possible without you.
 
-\vspace{2.5em}
+\vspace{0.8em}
 
 \begin{center}
-\rule{0.25\textwidth}{0.4pt}\\[6pt]
-{\itshape with gratitude}\\[6pt]
+\rule{0.25\textwidth}{0.4pt}\\[4pt]
+{\itshape with gratitude}\\[4pt]
 \rule{0.25\textwidth}{0.4pt}
 \end{center}
 
-\vspace{1em}
+\vspace{0.4em}
 
 \begin{center}
 \begin{minipage}{0.78\textwidth}
-\small\itshape\noindent
+\footnotesize\itshape\noindent
 For everyone whose work, words, and care went into this paper without a byline: the moderator who tagged the post, the worker who labelled the dataset, the reviewer who flagged the harm, the activist who filed the records request, the engineer who fixed it on a weekend, the parent who covered an evening, the friend who read a draft and said it could be clearer.
 
 If a future version of this standard reaches the people whose contributions made it possible, the credit belongs to you. Any errors that remain are mine alone.
 
-\medskip
+\smallskip
 \centering
 \upshape
 A.~H. \\
@@ -731,12 +715,52 @@ Los Angeles County, April \the\year
 \end{minipage}
 \end{center}
 
-\vspace{1.5em}
+\vspace{0.2em}
+
+\begin{center}
+\begin{tikzpicture}[
+    markline/.style={line width=0.8pt, draw=teal!45!black},
+    nodebit/.style={circle, draw=teal!55!black, fill=teal!8, minimum size=0.55cm, inner sep=1pt, font=\scriptsize\bfseries}
+]
+\draw[teal!22, line width=1.2pt] (0,0) circle (1.55);
+\draw[teal!32, line width=0.7pt] (0,0) circle (0.92);
+\foreach \ang/\lab in {90/D,210/H,330/C} {
+    \node[nodebit] (n\lab) at (\ang:1.55) {\lab};
+    \draw[markline] (0,0) -- (n\lab);
+}
+\draw[teal!40, fill=teal!8] (0,0) circle (0.11);
+\node[font=\scriptsize, text=black!65] at (0,-2.0) {human data collective};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.1em}
+
+\begin{center}
+\fbox{\parbox{0.78\textwidth}{%
+\scriptsize
+\textbf{attest} \texttt{v3.0} \hfill \texttt{2026-04-22-77bcda}\\[2pt]
+\textit{Human--AI collaboration.}\\[2pt]
+{\renewcommand{\arraystretch}{0.9}%
+\begin{tabular}{@{}lp{0.56\textwidth}@{}}
+\textbf{Content} & The Human Data Collective \\
+\textbf{Author} & A.~Harshberger \\
+\textbf{Model/tooling} & Claude Opus 4.7, Gemini 3.1 Pro (Preview), GitHub Copilot in VS Code \\
+\textbf{Role} & human-directed drafting, citation lookup, \LaTeX{} formatting, and revision support \\
+\textbf{Method} & multi-prompt iterative authoring with human-selected structure, argument, and final wording \\
+\textbf{Timestamp} & 2026-04-22T04:35:54.795Z \\
+\textbf{Signature} & HMAC-SHA256 \texttt{936e2483\dots a7dd9a1f} \\
+\textbf{Verify} & \url{https://attest.97115104.com/s/r11xzkrm} \\
+\end{tabular}}
+}}
+\end{center}
+
+\vspace{0.2em}
 
 \begin{center}
 \rule{0.6\textwidth}{0.3pt}\\[3pt]
 {\scriptsize\sffamily\textsc{Colophon.}\quad Set in Computer Modern with \LaTeX{} on macOS. Drafted, revised, and typeset between November \the\numexpr\year-1\relax{} and April \the\year{} with the assistance of Claude Opus~4.7 and Gemini~3.1~Pro (Preview) under human direction. Released for public comment under CC~BY~4.0; the AIISP-1 reference implementation is released under the MIT Licence.}
 \end{center}
+\endgroup
 
 \onecolumn
 \newpage
