@@ -373,7 +373,7 @@ Environmental lines can be gamed by optimistic telemetry, stale regional factors
 
 ## 13. Reference implementation expectations
 
-The reference implementation directories in this repository are placeholders for MIT-licensed code:
+The reference implementation directories in this repository describe the MIT-licensed implementation targets:
 
 - `reference/contracts/` for the HDCT token and settlement contract;
 - `reference/router/` for the HTTP router and batch writer;

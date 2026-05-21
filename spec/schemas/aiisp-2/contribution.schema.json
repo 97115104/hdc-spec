@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://97115104.github.io/aiisp-spec/schemas/aiisp-2/contribution.schema.json",
+  "$id": "https://97115104.github.io/aiisp-spec/spec/schemas/aiisp-2/contribution.schema.json",
   "title": "AIISP-2 Accepted Data Contribution",
   "type": "object",
   "additionalProperties": false,

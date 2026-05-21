@@ -26,18 +26,30 @@ jobs:
 
       - name: Stage Pages content
         run: |
+          rm -rf _site
           mkdir -p _site
-          cp docs/index.html  _site/index.html
-          cp docs/spec.html   _site/spec.html
+          cp index.html       _site/index.html
+          cp spec.html        _site/spec.html
           cp spec/aiisp-1.md  _site/aiisp-1.md
           cp spec/aiisp-2.md  _site/aiisp-2.md
           cp README.md        _site/README.md
           cp GOVERNANCE.md    _site/GOVERNANCE.md
           cp CONTRIBUTING.md  _site/CONTRIBUTING.md
+          cp CODE_OF_CONDUCT.md _site/CODE_OF_CONDUCT.md
+          cp SECURITY.md      _site/SECURITY.md
+          cp CHANGELOG.md     _site/CHANGELOG.md
+          cp LICENSE          _site/LICENSE
+          cp -R LICENSES      _site/LICENSES
+          cp -R spec          _site/spec
+          cp -R examples      _site/examples
+          cp -R reference     _site/reference
+          mkdir -p _site/schemas
+          cp -R spec/schemas/aiisp-2 _site/schemas/aiisp-2
           mkdir -p _site/paper
           cp -R paper/v1 _site/paper/v1
           cp -R paper/v2 _site/paper/v2
           find _site -name .DS_Store -delete
+          find _site -name '*.tex' -delete
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

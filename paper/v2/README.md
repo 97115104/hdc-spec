@@ -2,7 +2,6 @@
 
 This folder contains the Human Data Collective v2 companion paper.
 
-- [`human-data-collective-v2.tex`](./human-data-collective-v2.tex) - LaTeX source.
 - [`human-data-collective-v2.md`](./human-data-collective-v2.md) - Markdown mirror.
 - [`human-data-collective-v2.pdf`](./human-data-collective-v2.pdf) - Typeset PDF.
 

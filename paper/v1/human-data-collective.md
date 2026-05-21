@@ -368,10 +368,10 @@ This appendix collects, in one place, every named individual and named organizat
 - **Leopold Aschenbrenner.** Former member of OpenAI's Superalignment team and author of *Situational Awareness*; quoted in §Murky Data on the capability impact of reinforcement learning from human feedback. <https://situational-awareness.ai/> &middot; <https://x.com/leopoldasch>
 - **Emily M. Bender.** Professor of linguistics at the University of Washington and co-author of *Stochastic Parrots*; cited throughout the data sections. <https://faculty.washington.edu/ebender/> &middot; <https://dair-community.social/@emilymbender>
 - **Timnit Gebru.** Founder and executive director of the Distributed AI Research Institute and co-author of *Stochastic Parrots*. <https://dair-institute.org/> &middot; <https://bsky.app/profile/timnitgebru.bsky.social> &middot; <https://x.com/timnitGebru>
-- **Karen Hao.** Author of *Empire of AI: Dreams and Nightmares in Sam Altman's OpenAI* and a primary on-the-ground source for the environmental, labor, and corporate-history material in this paper. <https://karendhao.com/empire/> &middot; <https://www.linkedin.com/in/karendhao/> &middot; <https://bsky.app/profile/karenhao.bsky.social> &middot; <https://x.com/_KarenHao>
+- **Karen Hao.** Author of *Empire of AI: Dreams and Nightmares in Sam Altman's OpenAI* and a primary on-the-ground source for the environmental, labor, and corporate-history material in this paper. <https://karendhao.com/empire/> &middot; <https://bsky.app/profile/karenhao.bsky.social> &middot; <https://x.com/_KarenHao>
 - **Demis Hassabis.** Co-founder and chief executive officer of Google DeepMind and 2024 Nobel laureate in Chemistry (jointly with John Jumper) for the AlphaFold protein-structure prediction system; quoted in §Murky Data on data curation as the field's emerging bottleneck. <https://deepmind.google/> &middot; <https://x.com/demishassabis>
 - **Austin Harshberger.** Author of this paper, founder of Happy Stack Calculus, and editor of the AIISP-1 specification. <https://links.97115104.com> &middot; <https://blog.97115104.com>
-- **Jared Kaplan.** Co-founder and chief science officer of Anthropic and a lead author of the foundational scaling-laws paper for neural language models; quoted in §Murky Data. <https://www.linkedin.com/in/jared-kaplan-645843213/>
+- **Jared Kaplan.** Co-founder and chief science officer of Anthropic and a lead author of the foundational scaling-laws paper for neural language models; quoted in §Murky Data. <https://arxiv.org/abs/2001.08361>
 - **Jaron Lanier.** Computer scientist, author, and Microsoft Research interdisciplinary scientist; co-author with E. Glen Weyl of the data-dignity argument cited in Appendix A. <https://www.jaronlanier.com/>
 - **Gavin Leech.** Co-author with Dwarkesh Patel of *The Scaling Era*. <https://scholar.google.com/citations?user=xC-v_aUAAAAJ&hl=en>
 - **Angelina McMillan-Major.** Computational linguist and co-author of *Stochastic Parrots*. <https://scholar.google.com/citations?user=1vwgtA8AAAAJ&hl=en>
@@ -507,7 +507,7 @@ Los Angeles County, April 2026
 24. World Wide Web Consortium. (2013). *PROV-O: The PROV Ontology* (W3C Recommendation). <https://www.w3.org/TR/prov-o/>
 25. Courty, B., Schmidt, V., Goyal-Kamal, et al. (2024). *CodeCarbon: Estimate and Track Carbon Emissions from Compute*. <https://github.com/mlco2/codecarbon>
 26. Lacoste, A., Luccioni, A., Schmidt, V., & Dandres, T. (2019). *Quantifying the Carbon Emissions of Machine Learning*. arXiv:1910.09700. <https://arxiv.org/abs/1910.09700>
-27. Rumburg, R., Sethi, F., & Nagaraj, H. (2018). *Audius: A Decentralized Protocol for Audio Content*. <https://whitepaper.audius.co/AudiusWhitepaper.pdf>
+27. Rumburg, R., Sethi, F., & Nagaraj, H. (2018). *Audius: A Decentralized Protocol for Audio Content*. <https://docs.audius.co/reference/whitepaper/>
 28. Royal. (2021). *Royal: Own a Piece of Your Favorite Songs*. <https://royal.io>
 29. Scholz, T. (2016). *Platform Cooperativism: Challenging the Corporate Sharing Economy*. Rosa Luxemburg Stiftung New York Office.
 30. Schneider, N. (2018). *Everything for Everyone: The Radical Tradition That Is Shaping the Next Economy*. Nation Books.

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIISP Reference Design</title>
+<style>
+  body { margin: 0; color: #1a1a1a; background: #fbfaf6; font: 16px/1.55 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+  main { max-width: 84ch; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #c9c4b3; padding-bottom: 0.4rem; }
+  h2 { font-size: 0.9rem; margin-top: 1.8rem; text-transform: uppercase; }
+  a { color: #1f4f8a; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { border: 1px solid #c9c4b3; padding: 0.45rem 0.6rem; vertical-align: top; }
+  code { background: #f0ede4; padding: 0.05rem 0.25rem; }
+  li { margin: 0.35rem 0; }
+  .muted { color: #666; }
+</style>
+</head>
+<body>
+<main>
+  <h1>AIISP-2 Reference Design</h1>
+  <p class="muted">MIT-licensed implementation target for AIISP-2. The active specification and schemas remain normative.</p>
+
+  <table>
+    <tr><th>Surface</th><th>Purpose</th><th>Primary requirement</th></tr>
+    <tr><td><a href="./contracts/">Contracts</a></td><td>HDCT token and settlement behavior.</td><td>Mint once per accepted event and reject duplicate <code>event_id</code> values.</td></tr>
+    <tr><td><a href="./router/">Router</a></td><td>HTTP routing, category selection, node dispatch, and batch writing.</td><td>Return ordinary model responses while producing auditable AIISP-2 settlement records.</td></tr>
+    <tr><td><a href="./node/">Node</a></td><td>Inference-node adapter and manifest behavior.</td><td>Publish capabilities, serve eligible category models, and sign serving evidence.</td></tr>
+    <tr><td><a href="./conformance/">Conformance</a></td><td>Schema, routing, duplicate-event, settlement, and privacy checks.</td><td>Verify implementations against AIISP-2 Draft v0.1 behavior.</td></tr>
+  </table>
+
+  <h2>Implementation Sequence</h2>
+  <ol>
+    <li>Validate examples against the JSON schemas.</li>
+    <li>Implement <code>POST /v2/inference</code> in the router.</li>
+    <li>Implement node manifests, health checks, and serving-evidence signatures.</li>
+    <li>Implement local-chain settlement with duplicate-event rejection.</li>
+    <li>Add conformance cases for schema validity, routing failures, settlement failures, and privacy redaction.</li>
+    <li>Run the same conformance suite against a local test chain and then Base Sepolia.</li>
+  </ol>
+
+  <p><a href="../spec.html">Read the active spec</a> · <a href="../spec/schemas/aiisp-2/">Schemas</a> · <a href="../examples/aiisp-2/">Examples</a> · <a href="../">Back to AIISP</a></p>
+</main>
+</body>
+</html>

@@ -315,16 +315,16 @@ Los Angeles County, May 2026
 
 | Field | Value |
 | --- | --- |
-| Content | `paper/v2/human-data-collective-v2.tex` |
+| Content | `paper/v2/human-data-collective-v2.md` and `paper/v2/human-data-collective-v2.pdf` |
 | Author | Austin Harshberger |
 | Model | GPT-5 Codex, collaborated, Codex CLI |
 | Role | revision, typesetting, verification, and layout support |
-| Method | human-selected edits applied directly in LaTeX and rebuilt with `pdflatex` |
+| Method | human-selected edits reflected in the Markdown and PDF release files |
 | Timestamp | 2026-04-29T21:05:52.472Z |
 | Signature | HMAC-SHA256 `650a2187...d8fa8fc` |
 | Verify | <https://attest.97115104.com/s/574l69nm> |
 
-**Colophon.** Set in Computer Modern with LaTeX on macOS. Drafted, revised, and typeset between November 2025 and May 2026 with the assistance of GPT-5 Codex under human direction. Released for public comment under CC BY 4.0; the AIISP-1 and AIISP-2 reference implementations are released under the MIT Licence.
+**Colophon.** The public PDF is set in Computer Modern. Drafted, revised, and typeset between November 2025 and May 2026 with the assistance of GPT-5 Codex under human direction. Released for public comment under CC BY 4.0; the AIISP-1 and AIISP-2 reference implementations are released under the MIT Licence.
 
 ## References
 
@@ -350,7 +350,7 @@ Los Angeles County, May 2026
 
 [github2026usagebilling] M. Rodriguez. GitHub Copilot is moving to usage-based billing. *The GitHub Blog*, April 27, 2026. <https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/>
 
-[harshberger2026hdcv1] A. Harshberger. *The Human Data Collective: A Standard for Open, Sustainable, and Equitable Machine Intelligence With Transparency and Compensation Optionality for Large Language Model Inference*. SSRN, April 24, 2026. <http://dx.doi.org/10.2139/ssrn.6639918>
+[harshberger2026hdcv1] A. Harshberger. *The Human Data Collective: A Standard for Open, Sustainable, and Equitable Machine Intelligence With Transparency and Compensation Optionality for Large Language Model Inference*. April 24, 2026. <https://97115104.github.io/aiisp-spec/paper/v1/>
 
 [hao2025empire] K. Hao. *Empire of AI: Dreams and Nightmares in Sam Altman's OpenAI*. Penguin Publishing Group, 2025.
 

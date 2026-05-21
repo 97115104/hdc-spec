@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIISP Reference Contracts</title>
+<style>
+  body { margin: 0; color: #1a1a1a; background: #fbfaf6; font: 16px/1.55 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+  main { max-width: 84ch; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #c9c4b3; padding-bottom: 0.4rem; }
+  h2 { font-size: 0.9rem; margin-top: 1.8rem; text-transform: uppercase; }
+  a { color: #1f4f8a; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { border: 1px solid #c9c4b3; padding: 0.45rem 0.6rem; vertical-align: top; }
+  pre { border: 1px solid #c9c4b3; padding: 1rem; overflow-x: auto; background: transparent; }
+  code { background: #f0ede4; padding: 0.05rem 0.25rem; }
+  li { margin: 0.35rem 0; }
+  .muted { color: #666; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reference Contracts</h1>
+  <p class="muted">Contract behavior for HDCT issuance, settlement event recording, batch totals, and duplicate-event rejection.</p>
+
+  <table>
+    <tr><th>Contract</th><th>Role</th></tr>
+    <tr><td><code>HDCTToken</code></td><td>ERC-20-compatible token for local chains and Base-compatible deployments.</td></tr>
+    <tr><td><code>AIISPSettlement</code></td><td>Registry that accepts verified events, records event identifiers, emits settlement events, and mints HDCT.</td></tr>
+    <tr><td><code>AIISPBatchWriter</code></td><td>Optional helper that submits batch metadata and forwards accepted events into settlement.</td></tr>
+  </table>
+
+  <h2>Required State</h2>
+  <ul>
+    <li><code>usedEventIds[event_id]</code> records every accepted event identifier.</li>
+    <li><code>batchTotals[batch_id]</code> records aggregate HDCT and event counts for audit.</li>
+    <li><code>authorizedRouters[address]</code> limits settlement submission to approved routers or verifiers.</li>
+    <li><code>supportedEventTypes</code> is limited to AIISP-2 issuance event types.</li>
+  </ul>
+
+  <h2>Settlement Rules</h2>
+  <ul>
+    <li>Reject duplicate <code>event_id</code> values.</li>
+    <li>Reject event types outside the AIISP-2 issuance set.</li>
+    <li>Never mint for rejected data, rejected DPO pairs, failed inference, policy-blocked inference, or old data reuse.</li>
+    <li>Emit audit-safe fields: <code>event_id</code>, <code>event_type</code>, <code>category</code>, <code>contributor</code>, <code>hdct_amount</code>, and <code>batch_id</code>.</li>
+    <li>Never expose raw prompts, completions, private submissions, private DPO text, client secrets, or proprietary model weights.</li>
+  </ul>
+
+  <h2>Minimal Interface</h2>
+  <pre><code>function settleEvent(
+    bytes32 eventId,
+    bytes32 eventType,
+    bytes32 category,
+    address contributor,
+    uint256 hdctAmount,
+    bytes32 batchId,
+    bytes32 subjectRef
+) external;
+
+function isEventSettled(bytes32 eventId) external view returns (bool);</code></pre>
+
+  <p><a href="../">Back to reference</a> · <a href="../../spec.html">Read the active spec</a></p>
+</main>
+</body>
+</html>

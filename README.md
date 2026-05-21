@@ -16,9 +16,9 @@ AIISP-1 remains in the repo as a historical and provider-facing draft for reques
 - **Historical/provider-facing draft:** [`spec/aiisp-1.md`](./spec/aiisp-1.md)
 - **Schemas:** [`spec/schemas/aiisp-2/`](./spec/schemas/aiisp-2/)
 - **Examples:** [`examples/aiisp-2/`](./examples/aiisp-2/)
-- **Reference implementation skeleton:** [`reference/`](./reference/)
+- **Reference design:** [`reference/`](./reference/)
 - **Rendered docs:** <https://97115104.github.io/aiisp-spec/>
-- **Companion papers:** [HDC v1 paper folder](https://97115104.github.io/aiisp-spec/paper/v1/) and [HDC v2 paper folder](https://97115104.github.io/aiisp-spec/paper/v2/)
+- **Companion papers:** [HDC v1 paper folder](./paper/v1/) and [HDC v2 paper folder](./paper/v2/)
 
 ## AIISP-2 In One Screen
 
@@ -60,10 +60,10 @@ spec/
   schemas/aiisp-2/              # Draft v0.1 JSON schemas
 examples/aiisp-2/               # Example AIISP-2 records
 reference/
-  contracts/                    # HDCT and settlement contract skeleton
-  router/                       # Router skeleton
-  node/                         # Inference-node skeleton
-  conformance/                  # Conformance-test skeleton
+  contracts/                    # HDCT and settlement contract reference design
+  router/                       # Router reference design
+  node/                         # Inference-node reference design
+  conformance/                  # Conformance-suite reference design
 paper/
   v1/                           # HDC v1 companion paper
   v2/                           # HDC v2 companion paper
@@ -76,6 +76,16 @@ LICENSES/                       # SPDX license directory
   CC-BY-4.0.txt                 #   CC BY 4.0 (specification)
   MIT.txt                       #   MIT (code)
 ```
+
+## Local Preview
+
+Run the repo-root deploy script:
+
+```sh
+./deploy-locally.sh
+```
+
+The script builds the site, restarts the local preview server on `http://127.0.0.1:4173/`, smoke-checks the main pages, and opens the site in your browser. Override the port with `AIISP_PORT=4174 ./deploy-locally.sh`; skip browser launch with `AIISP_OPEN_BROWSER=0 ./deploy-locally.sh`.
 
 ## Specification Status
 
@@ -111,17 +121,15 @@ Full guidelines are in [`CONTRIBUTING.md`](./CONTRIBUTING.md). Decision process 
 
 The companion papers are non-normative motivation and background:
 
-- [HDC v1 paper folder](https://97115104.github.io/aiisp-spec/paper/v1/) contains the original Human Data Collective paper.
-- [HDC v2 paper folder](https://97115104.github.io/aiisp-spec/paper/v2/) contains the Human Data Collective v2 paper.
+- [HDC v1 paper folder](./paper/v1/) contains the original Human Data Collective paper.
+- [HDC v2 paper folder](./paper/v2/) contains the Human Data Collective v2 paper.
 
 The normative protocol text lives in `spec/`.
 
-To rebuild a paper PDF from a LaTeX source file, run `pdflatex` from the corresponding paper directory.
-
 ## License
 
-- Specification text, schemas, examples, and paper text are licensed [Creative Commons Attribution 4.0 International](./LICENSE).
-- Reference implementation code is licensed under the [MIT License](./LICENSE-CODE).
+- Specification text, schemas, examples, and paper text are licensed [Creative Commons Attribution 4.0 International](./LICENSES/CC-BY-4.0.txt).
+- Reference implementation code is licensed under the [MIT License](./LICENSES/MIT.txt).
 
 ## Citing This Document
 

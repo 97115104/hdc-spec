@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIISP Reference Conformance</title>
+<style>
+  body { margin: 0; color: #1a1a1a; background: #fbfaf6; font: 16px/1.55 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+  main { max-width: 84ch; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #c9c4b3; padding-bottom: 0.4rem; }
+  h2 { font-size: 0.9rem; margin-top: 1.8rem; text-transform: uppercase; }
+  a { color: #1f4f8a; }
+  pre { border: 1px solid #c9c4b3; padding: 1rem; overflow-x: auto; background: transparent; }
+  code { background: #f0ede4; padding: 0.05rem 0.25rem; }
+  li { margin: 0.35rem 0; }
+  .muted { color: #666; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reference Conformance</h1>
+  <p class="muted">Interoperability, settlement-safety, and privacy checks for AIISP-2 implementations.</p>
+
+  <h2>Schema Cases</h2>
+  <ul>
+    <li>Every example validates against the matching AIISP-2 schema.</li>
+    <li>Invalid decimal quantities are rejected where schemas require decimal strings.</li>
+    <li>Invalid event types are rejected.</li>
+    <li>Inference events without environmental lines are rejected.</li>
+    <li>Node manifests missing required capability fields are rejected.</li>
+  </ul>
+
+  <h2>Router Cases</h2>
+  <ul>
+    <li>Missing <code>X-AIISP-Category</code> returns <code>aiisp_category_required</code>.</li>
+    <li>Unknown categories return <code>aiisp_category_unknown</code>.</li>
+    <li>Models outside the requested category return <code>aiisp_model_not_in_category</code>.</li>
+    <li>Successful responses include category, model, node, settlement event, and settlement batch identifiers.</li>
+  </ul>
+
+  <h2>Settlement Cases</h2>
+  <ul>
+    <li>Duplicate <code>event_id</code> settlement attempts are rejected.</li>
+    <li>Accepted data contributions, verified inference events, settled inference units, and accepted DPO pairs mint once.</li>
+    <li>Rejected data, rejected DPO pairs, failed inference, and old data reuse do not mint.</li>
+    <li>Batch totals equal the sum of contained events.</li>
+  </ul>
+
+  <h2>Minimum Command Shape</h2>
+  <pre><code>aiisp-conformance validate-examples
+aiisp-conformance test-router --base-url http://127.0.0.1:8080
+aiisp-conformance test-settlement --rpc-url http://127.0.0.1:8545</code></pre>
+
+  <p><a href="../">Back to reference</a> · <a href="../../spec.html">Read the active spec</a></p>
+</main>
+</body>
+</html>

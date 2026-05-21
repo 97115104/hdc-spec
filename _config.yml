@@ -7,10 +7,6 @@ url: "https://97115104.github.io"
 baseurl: "/aiisp-spec"
 
 exclude:
-  - CITATION.cff
-  - CODE_OF_CONDUCT.md
-  - CONTRIBUTING.md
-  - SECURITY.md
-  - LICENSES/
+  - docs/
   - "*.sh"
   - vendor/

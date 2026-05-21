@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIISP Reference Router</title>
+<style>
+  body { margin: 0; color: #1a1a1a; background: #fbfaf6; font: 16px/1.55 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+  main { max-width: 84ch; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #c9c4b3; padding-bottom: 0.4rem; }
+  h2 { font-size: 0.9rem; margin-top: 1.8rem; text-transform: uppercase; }
+  a { color: #1f4f8a; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { border: 1px solid #c9c4b3; padding: 0.45rem 0.6rem; vertical-align: top; }
+  code { background: #f0ede4; padding: 0.05rem 0.25rem; }
+  li { margin: 0.35rem 0; }
+  .muted { color: #666; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reference Router</h1>
+  <p class="muted">HTTP boundary for category routing, node dispatch, serving evidence, and batch settlement.</p>
+
+  <h2>Request Path</h2>
+  <ol>
+    <li>Receive <code>POST /v2/inference</code>.</li>
+    <li>Require <code>X-AIISP-Category</code>.</li>
+    <li>Validate the request body against the AIISP-2 inference-request schema.</li>
+    <li>Resolve the category to an eligible model and inference node.</li>
+    <li>Dispatch the request to the node.</li>
+    <li>Receive model output and serving evidence.</li>
+    <li>Create a settlement event and add it to the current settlement batch.</li>
+    <li>Return an ordinary model-response object with AIISP-2 headers and/or an <code>aiisp</code> response object.</li>
+  </ol>
+
+  <h2>Headers</h2>
+  <table>
+    <tr><th>Header</th><th>Direction</th><th>Meaning</th></tr>
+    <tr><td><code>X-AIISP-Category</code></td><td>request and response</td><td>Category selected for routing and settlement.</td></tr>
+    <tr><td><code>X-AIISP-Model</code></td><td>response</td><td>Category model served.</td></tr>
+    <tr><td><code>X-AIISP-Node</code></td><td>response</td><td>Inference node that served the request.</td></tr>
+    <tr><td><code>X-AIISP-Settlement-Event</code></td><td>response</td><td>Event identifier for settlement.</td></tr>
+    <tr><td><code>X-AIISP-Settlement-Batch</code></td><td>response</td><td>Batch identifier containing the event.</td></tr>
+  </table>
+
+  <h2>Failure Cases</h2>
+  <ul>
+    <li><code>aiisp_category_required</code> for missing category.</li>
+    <li><code>aiisp_category_unknown</code> for unknown category.</li>
+    <li><code>aiisp_model_not_in_category</code> for a requested model outside the category.</li>
+    <li><code>aiisp_node_unavailable</code> for unavailable nodes.</li>
+    <li><code>aiisp_settlement_unavailable</code> for failed settlement.</li>
+    <li><code>aiisp_policy_rejected</code> for policy rejection.</li>
+  </ul>
+
+  <h2>Privacy Requirement</h2>
+  <p>The router must not write raw prompts, completions, private client identifiers, secrets, or undisclosed contributor data into public settlement records.</p>
+
+  <p><a href="../">Back to reference</a> · <a href="../../spec.html">Read the active spec</a></p>
+</main>
+</body>
+</html>

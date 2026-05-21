@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIISP Reference Node</title>
+<style>
+  body { margin: 0; color: #1a1a1a; background: #fbfaf6; font: 16px/1.55 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+  main { max-width: 84ch; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #c9c4b3; padding-bottom: 0.4rem; }
+  h2 { font-size: 0.9rem; margin-top: 1.8rem; text-transform: uppercase; }
+  a { color: #1f4f8a; }
+  code { background: #f0ede4; padding: 0.05rem 0.25rem; }
+  li { margin: 0.35rem 0; }
+  .muted { color: #666; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reference Node</h1>
+  <p class="muted">Inference-node adapter behavior for manifests, serving evidence, health checks, and environmental reporting.</p>
+
+  <h2>Manifest</h2>
+  <p>Each node must publish a manifest conforming to <a href="../../spec/schemas/aiisp-2/node-manifest.schema.json"><code>node-manifest.schema.json</code></a>.</p>
+  <ul>
+    <li><code>node_id</code></li>
+    <li><code>operator</code></li>
+    <li><code>endpoint</code></li>
+    <li><code>supported_categories</code></li>
+    <li><code>supported_models</code></li>
+    <li><code>settlement_wallet</code></li>
+    <li><code>energy_region</code></li>
+    <li><code>measurement_method</code></li>
+    <li><code>software_version</code></li>
+  </ul>
+
+  <h2>Serving Requirements</h2>
+  <ul>
+    <li>Serve only registered models for categories listed in the node manifest.</li>
+    <li>Expose a health endpoint suitable for router eligibility checks.</li>
+    <li>Return serving evidence for completed inference work.</li>
+    <li>Report environmental data using the manifest's declared measurement method.</li>
+    <li>Sign serving evidence when the node has a public key or DID document.</li>
+  </ul>
+
+  <h2>Serving Evidence</h2>
+  <ul>
+    <li>router request identifier</li>
+    <li>served model identifier</li>
+    <li>node identifier</li>
+    <li>token usage or settled unit count</li>
+    <li>environmental line</li>
+    <li>timestamp</li>
+    <li>signature or equivalent authenticity proof</li>
+  </ul>
+
+  <p><a href="../">Back to reference</a> · <a href="../../spec.html">Read the active spec</a></p>
+</main>
+</body>
+</html>
